@@ -1,0 +1,16 @@
+
+<nb-card [accent]="selectedCard === service ? 'primary' : ''">
+    <nb-card-header ></nb-card-header>
+    <nb-card-body fxLayout="row" fxLayoutGap="15px">
+        <nb-user 
+            name="{{service.name}}" 
+            title="{{service.short_description}}"
+            size="large"
+            picture="{{service.thumbnail_url}}">
+        </nb-user>
+        <div fxLayout="column" fxLayoutAlign="space-between">
+            <p class="service-duration">{{service_duration}} min.</p>
+            <p class="service-price" fxFlexAlign="end">{{service.price_min}}€</p>
+        </div>
+    </nb-card-body>
+</nb-card>

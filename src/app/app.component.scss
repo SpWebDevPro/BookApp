@@ -1,0 +1,15 @@
+@import '../styles.scss';
+@import '../themes.scss';
+
+
+.header-menu {
+    display: block;
+    width: 100%;
+}
+
+nb-layout-column {
+    padding: nb-theme(layout-small-padding);
+    margin:0;
+    text-align:center;
+}
+

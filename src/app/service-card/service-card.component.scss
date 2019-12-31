@@ -1,0 +1,15 @@
+@import '../../themes.scss';
+@import '../../styles.scss';
+
+nb-card-header{
+padding: 0;
+}
+
+.service-duration {
+    font-size: var(--text-caption-font-size);
+}
+
+.service-price {
+    font-weight: var(--text-heading-6-font-weight);
+    color: var(--text-heading-6-color);
+}

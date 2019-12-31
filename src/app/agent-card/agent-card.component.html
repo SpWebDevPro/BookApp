@@ -1,0 +1,10 @@
+
+<nb-card [accent]="selectedCard === agent ? 'primary' : ''">  
+        <nb-card-body >
+            <nb-user 
+                name="{{agent.first_name}}" 
+                size="large"
+                picture="{{agent.thumbnail_url}}">
+            </nb-user>
+        </nb-card-body>
+    </nb-card>

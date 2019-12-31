@@ -1,0 +1,12 @@
+@import '../../themes.scss';
+@import '../../styles.scss';
+
+
+.init {
+    background-color: nb-theme(color-primary-500);
+    min-height: 100vh;
+}
+    
+.image {
+    margin-top: 40vh;
+}

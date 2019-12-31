@@ -1,0 +1,55 @@
+<div fxLayout="column" fxLayoutAlign="center">
+  <nb-card fxFlexAlign="center" class="calendar">
+	<nb-card-body>
+		<div fxLayout="row" fxLayoutWrap fxLayoutAlign="space-around">
+			<button [disabled]="btnMonthPrevDisabled" nbButton ghost (click)="getPreviousMonth(datePickerCurrent)" >
+				<i [className]="btnMonthPrevDisabled ? 'inactive material-icons md-36 icon-menu latepoint-icon latepoint-icon-arrow-right ' : 'material-icons md-36 primary icon-menu latepoint-icon latepoint-icon-arrow-right '" >
+					arrow_left
+				</i>
+			</button>
+			<div class="month-label h6">{{datePickerCurrent.dataCalendarMonthLabel}} {{datePickerCurrent.dataCalendarYear}}</div>
+			<button [disabled]="btnMonthNextDisabled" nbButton ghost (click)="getNextMonth(datePickerCurrent)" >
+				<i [className]="btnMonthNextDisabled ? 'inactive material-icons md-36 icon-menu latepoint-icon latepoint-icon-arrow-right ' : 'material-icons md-36 primary icon-menu latepoint-icon latepoint-icon-arrow-left'"  >
+					arrow_right
+				</i>
+			</button>
+		</div>
+		
+		<div class="os-weekdays">
+		<div *ngFor="let hebdoDay of hebdoDays; let i = index" class="{{hebdoDay.dayClass}}">{{hebdoDay.dayLabel}}</div>
+		</div>
+		
+		<div class="os-months">
+					<div class="os-monthly-calendar-days-w">
+				<div class="os-monthly-calendar-days">
+					<div role="button"
+						*ngFor="let dataToReturnDay of dataToReturnDays; let i = index" 
+						[ngClass]="dataToReturnDay.class_osDayOsDayCurrentWeekDay"
+						(click)="onSelectDay(dataToReturnDay)">
+						<div class="os-day-box">
+							<div class="os-day-number">{{dataToReturnDay.osDayNumber}}</div>
+							<div *ngIf="dataToReturnDay.class_osDayStatus" class="os-day-status">
+								<!-- <div [ngClass]="dataToReturnDay.divClassAvailable.class" [ngStyle]="{left:dataToReturnDay.divClassAvailable.styleleft,width:dataToReturnDay.divClassAvailable.stylewidth}"></div> -->
+								<div [ngClass]="{'day-available': dataToReturnDay.divClassAvailable.class}"></div>
+				
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nb-card-body>
+  </nb-card>
+  
+  <app-day-in-month fxFlexAlign="center" class="dayAvailabilities"></app-day-in-month>
+
+</div>
+
+
+
+
+
+
+
+
+	

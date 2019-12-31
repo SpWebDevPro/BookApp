@@ -1,0 +1,59 @@
+@import '../../themes.scss';
+@import '../../styles.scss';
+
+h1{
+    margin-block-start: 0;
+}
+
+.welcome {
+    background-color: nb-theme(color-primary-500);
+    min-height: 100vh;
+}
+
+.welcome-title {
+    color: nb-theme(color-primary-100);
+    width: 80%;
+}
+
+.welcome-content {
+    color: nb-theme(color-primary-100);
+    width: 80%;
+}
+
+button.welcome-button {
+    display:block;
+    margin: auto; 
+   
+}
+
+.add-app-btn {
+    display: none;
+}
+
+
+// @media all and (display-mode: standalone){
+//     .add-app-btn {
+//       display: none;
+//     }
+//   }
+
+[nbButton].appearance-filled.status-info:active {
+    background-color: var(--button-filled-info-text-color);
+    border-color: var(--button-filled-info-background-color);
+    color: var(--button-filled-info-background-color);
+}
+
+[nbButton].appearance-filled.status-info:focus {
+    border-color: var(--button-filled-info-text-color);
+}
+
+[nbButton].appearance-filled.status-info:hover {
+    background-color: var(--button-filled-info-text-color);
+    border-color: var(--button-filled-info-background-color);
+    color: var(--button-filled-info-background-color);
+}
+
+[nbButton]:focus {
+    box-shadow: 0 0 0 var(--button-outline-width) var(--button-filled-info-text-color);
+    outline: none;
+}

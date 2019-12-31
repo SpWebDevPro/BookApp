@@ -1,0 +1,27 @@
+@import '../../themes.scss';
+@import '../../styles.scss';
+
+
+.handling-error {
+    background-color: white;
+    width: 90%;
+    min-width: 300px;
+}
+
+.handling-error-btn {
+    margin-top:5% !important;
+    text-transform: none;
+    min-width:none;
+    text-align: center;
+}
+
+.handling-error-card-body{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+
+
+
+

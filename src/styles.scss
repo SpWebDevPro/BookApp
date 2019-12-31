@@ -1,1 +1,161 @@
+@import 'themes';
+@import '~@nebular/theme/styles/globals';
+
+@include nb-install() {
+  @include nb-theme-global();
+};
+
 /* You can add global styles to this file, and also import other style files */
+
+
+/*General Rules */
+
+.scrollDiv {
+  max-height: 100vh;
+  overflow: auto;
+}
+
+// :host {
+//   overflow:hidden;
+
+//   .router-wrap {
+//     position:relative;
+//   }
+
+//  router-outlet ~ * {
+//     position: absolute;
+//     width:100%;
+//     height:100%;
+//   }
+// }
+
+
+/*rules for PWA*/
+body {
+  -webkit-user-select:none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+/*Rules for cards */
+
+div.user-container {
+  width: 100%;
+}
+
+div.info-container {
+  width: 100%;
+  margin-left: 5%!important;
+  margin-right: 3%;
+}
+
+nb-user.size-large .user-title {
+  text-align: left;
+}
+
+nb-user.size-large .user-name {
+  text-align: left;
+}
+
+nb-card.accent {
+  border-top-style: var(--card-border-style);
+  border-top-width: 0.25rem;
+}
+
+
+
+
+
+/*Rules for buttons / input */
+
+.appearance-filled {
+  text-transform: none;
+  min-width:135px;
+}
+
+@media(max-width:350px){
+  .appearance-filled {
+    text-transform: none;
+  }
+}
+
+.inactive {
+  border-color: var(--button-filled-primary-disabled-border-color);
+  color: var(--button-filled-primary-disabled-text-color);
+}
+
+[nbInput]:focus {
+  outline: none;
+  border-color: var(--input-focus-border-color);
+  box-shadow: 0 0 0 var(--input-outline-width) nb-theme(color-primary-100);
+}
+
+/*Rules for the icon */
+
+.material-icons.md-18{ font-size: 18px;}
+.material-icons.md-24{ font-size: 24px;}
+.material-icons.md-36{ font-size: 36px;}
+.material-icons.md-48{ font-size: 48px;}
+.material-icons.icon-message{
+  margin-right: 6px;
+}
+.material-icons.icon-menu{
+  margin-right: 10px;
+}
+
+.material-icons.primary { color:nb-theme(color-primary-500)};
+
+
+/*Rules for UI messages */
+
+.success-msg,
+.error-msg {
+  margin: 3% 5%;
+  padding: 10px;
+  border-radius: 3px 3px 3px 3px;
+  width: 90%;
+}
+
+.success-msg {
+  color: nb-theme(color-success-700);
+  background-color: nb-theme(color-success-300);
+  vertical-align: text-bottom ;
+}
+
+.error-msg {
+  color: nb-theme(color-danger-600);
+  background-color: nb-theme(color-danger-300);
+  vertical-align: text-bottom ;
+}
+
+.message-text{
+  margin:0;
+  padding:2px 0px 0px 0px;
+}
+
+.error{
+  color: nb-theme(color-danger-600);
+}
+
+.success{
+  color: nb-theme(color-success-700);
+}
+
+
+/*Rules for 404page and confirmation */
+
+.bye {
+  background-color: nb-theme(color-primary-500);
+  min-height: 100vh;
+}
+
+.bye-content {
+  width: 80%;
+  margin-top: 0%;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  text-align:center;
+  color: nb-theme(color-primary-100);
+}

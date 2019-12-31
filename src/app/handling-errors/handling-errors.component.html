@@ -1,0 +1,16 @@
+
+<div  fxLayout fxLayoutAlign="center">
+    <nb-card class="handling-error">
+        <nb-card-body class="handling-error-card-body" fxLayout="column" fxLayoutAlign="center">
+            <div class="success-msg" fxLayout="row" *ngIf="successMessageAuth">
+                <i class="material-icons icon-message" >done</i>
+                <p class="message-text success">{{successMessageAuth}}</p>
+            </div>
+            <div class="error-msg" fxLayout="row" *ngIf="errorMessageAuth">
+                <i class="material-icons icon-message" >error</i>
+                <p class="message-text error">{{errorMessageAuth}}</p>
+            </div>
+            <button fxFlexAlign="center" class="handling-error-btn" nbButton size="tiny" (click)="close()">fermer</button>
+        </nb-card-body>
+    </nb-card>
+</div>

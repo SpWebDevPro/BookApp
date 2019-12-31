@@ -1,0 +1,23 @@
+@import '../../themes.scss';
+@import '../../styles.scss';
+
+
+
+.availableBtn {
+    margin: 2px;
+}
+
+.dayAvailability {
+    width: 100%;
+    max-width: 600px;
+}
+
+.divAvailableBtn{
+    display: inline-block;
+}
+
+.recap {
+    margin:auto;
+    width:80%;
+    text-align: center;
+}

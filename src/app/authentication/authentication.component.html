@@ -1,0 +1,37 @@
+<div class="auth" fxLayout="row" fxLayoutAlign="center">
+    <div *ngIf="isLoading">
+        <app-loding-spinner></app-loding-spinner>
+    </div>
+    <nb-card class="form-card" *ngIf="!isLoading">
+        <nb-card-body >
+            <h6>{{pageTitle}}</h6>
+            <div class="register" *ngIf="!pageDisplayIsLogin">
+                <form class="form-form" fxLayout="column" fxLayoutGap="10px" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                    <input type="text" nbInput fullWidth placeholder="Identifiant*" [formControlName]="'username'">
+                    <span class="error-message" *ngIf="!registerForm.get('username').valid && registerForm.get('username').touched">Entrez un identifiant valide</span>
+                    <input type="text" nbInput fullWidth placeholder="Email*" [formControlName]="'email'">
+                    <span class="error-message" *ngIf="!registerForm.get('email').valid && registerForm.get('email').touched">Entrez un email valide</span>
+                    <input type="text" nbInput fullWidth placeholder="Mot de passe*" [formControlName]="'password'">
+                    <span class="error-message" *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched">Entrez un mot de passe valide</span>
+                    <div class="form-valid" fxLayout="column" fxLayoutAlign="center">
+                        <button [disabled]="!registerForm.valid" class="form-button" type="submit" nbButton>Continuer</button>
+                    </div>
+                </form>
+            </div>
+            <div class="login" *ngIf="pageDisplayIsLogin">
+                <form class="form-form" fxLayout="column" fxLayoutGap="10px" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <input type="text" nbInput fullWidth placeholder="Identifiant*" [formControlName]="'username'">
+                    <span class="error-message" *ngIf="!loginForm.get('username').valid && loginForm.get('username').touched">Entrez un identifiant valide</span>
+                    <input type="text" nbInput fullWidth placeholder="Mot de passe*" [formControlName]="'password'">
+                    <span class="error-message" *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">Entrez un mot de passe valide</span>
+                    <div class="form-valid" fxLayout="column" fxLayoutAlign="center">
+                        <button [disabled]="!loginForm.valid" class="form-button" type="submit" nbButton>Continuer</button>
+                    </div>
+                </form>
+            </div>
+            <p *ngIf="errorMessage"><a href="{{url_retreive_password}}">Mot de passe oublié? </a></p>
+            <button nbButton class="change_display"(click)="changeDisplay()">{{pageMenu}}</button>
+
+        </nb-card-body>
+    </nb-card>
+</div>

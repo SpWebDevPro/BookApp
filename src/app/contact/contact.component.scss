@@ -1,0 +1,37 @@
+@import '../../themes.scss';
+@import '../../styles.scss';
+
+.form-form {
+    margin-top:5%;
+}
+
+.form-card {
+    width: 90%;
+    max-width: 600px;
+    margin-top:20px;
+}
+
+.form-button {
+    margin:auto;
+    text-transform: none !important;
+}
+
+.form-valid {
+    margin-top: 10%;
+    width: 100%;
+}
+
+.error-message {
+    color:nb-theme(color-danger-500);
+    display: inline-block;
+    text-align: left;
+    font-size:10px;
+    line-height: 12px;
+    margin: 2px 0 0;
+}
+
+.input-mail:disabled {
+        background-color: var(--input-disabled-background-color);
+        border-color: var(--input-disabled-border-color);
+        color: nb-theme(color-basic-600)!important;
+}

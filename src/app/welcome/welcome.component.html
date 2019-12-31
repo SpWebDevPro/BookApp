@@ -1,0 +1,9 @@
+
+<div class="welcome" fxLayout="column" fxLayoutAlign="center" >
+    <h1 fxFlexAlign="center" class="welcome-title">{{brand_Name_Application}}</h1>
+    <h6 fxFlexAlign="center" class="welcome-content">{{brand_welcome_message}}</h6>
+    <div fxLayout="column" fxLayoutGap="20px">
+        <button *ngIf="deferredPrompt" [className]="displayAppBtn === false ? 'add-app-btn' : 'welcome-button'"  nbButton status="info" (click)="promptInstall()" id="btnAddApp">Installer l'appli</button>
+        <button class="welcome-button" nbButton status="info" (click)="toAuthenticate()">Prendre Rendez-vous</button>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+
+<div fxLayout="column" fxLayoutAlign="center">
+        <nb-card fxFlexAlign="center" class="verify-card">
+        <nb-card-body >
+                <h6>Merci de vérifier les informations du rendez-vous</h6>
+                <div fxLayout="column">
+                        <p class="textleft"><span class="info-title textleft">Rendez-vous le : </span><span class="textleft"> &nbsp;{{booking.start_date | date:'dd MMM yyyy'}}</span></p>
+                        <p class="textleft"><span class="info-title textleft">A : </span><span class="textleft"> &nbsp;{{booking.start_time | minToHours}}H</span></p>
+                        <p class="textleft"><span class="info-title textleft">Pour une séance de : </span><span class="textleft">  &nbsp;{{vars_for_view.service.name}}</span></p>
+                        <p class="textleft"><span class="info-title textleft">Durée : </span><span class="textleft"> &nbsp;{{vars_for_view.service.duration}} minutes</span></p>
+                        <p class="textleft"><span class="info-title textleft">Avec : </span><span class="textleft"> &nbsp;{{vars_for_view.agent.first_name}}</span></p>
+                        <p class="textleft"><span class="info-title textleft">Adresse : </span><span class="textleft"> &nbsp;{{vars_for_view.location.name}}, {{vars_for_view.location.full_address}}</span></p>
+                        <p class="info-title">Tout rendez-vous non honoré non excusé ne pourra être reconduit</p>
+                </div>
+        </nb-card-body>
+        </nb-card>
+</div>

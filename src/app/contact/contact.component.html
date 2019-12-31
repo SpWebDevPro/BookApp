@@ -1,0 +1,21 @@
+<div fxLayout="row" fxLayoutAlign="center">
+<nb-card class="form-card">
+    <nb-card-body>
+        <form class="form-form" fxLayout="column" fxLayoutGap="10px" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+            <input type="text" nbInput fullWidth placeholder="Nom*" [formControlName]="'nom'">
+            <span class="error-message" *ngIf="!contactForm.get('nom').valid && contactForm.get('nom').touched">Entrez un nom valide</span>
+            <input type="text" nbInput fullWidth placeholder="Prenom*" [formControlName]="'prenom'">
+            <span class="error-message" *ngIf="!contactForm.get('prenom').valid && contactForm.get('prenom').touched">Entrez un prénom valide</span>
+            <input type="text" nbInput fullWidth placeholder="Tel*" [formControlName]="'tel'">
+            <span class="error-message" *ngIf="!contactForm.get('tel').valid && contactForm.get('tel').touched">Entrez un numéro de téléphone valide</span>
+            <input class="input-mail" type="text" nbInput fullWidth placeholder="Email*" [formControlName]="'email'">
+            <span class="error-message" *ngIf="!contactForm.get('email').valid && contactForm.get('email').touched">Entrez un email valide</span>
+            <textarea nbInput fullWidth placeholder="Commentaire" [formControlName]="'commentaire'"></textarea>
+            <div class="form-valid" fxLayout="column" fxLayoutAlign="center">
+                <p class="caption" >En cliquant "j'accepte", Vous acceptez notre politique de confidentialité</p>
+                <button size small [disabled]="!contactForm.valid" class="form-button" type="submit" nbButton>J'accepte</button>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>
+</div>
