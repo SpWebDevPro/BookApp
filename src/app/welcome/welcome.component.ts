@@ -52,6 +52,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
         content:`${this.brand_company}`
       },
     ])
+    // this.dataStorageService.displayHeaderAndFooter(false);
   }
 
   ngOnDestroy(){

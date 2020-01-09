@@ -61,10 +61,12 @@ $nb-themes: nb-register-theme((
   text-heading-6-color:#333,
   text-heading-6-font-weight:600,
 
-  button-text-font-weight: 100,
+  button-text-font-weight: 700,
   button-filled-info-background-color: color-primary-100,
   button-filled-info-border-color: color-primary-100,
-  button-filled-info-text-color:color-primary-500,
+  button-filled-info-text-color: color-primary-500,
+  button-filled-primary-hover-background-color : color-primary-500,
+  button-filled-primary-hover-border-color: color-primary-500,
 
   layout-background-color:color-primary-100,
   background-primary-color-1: color-primary-500,

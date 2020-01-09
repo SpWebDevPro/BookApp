@@ -1,14 +1,23 @@
 @import '../../themes.scss';
 @import '../../styles.scss';
 
+.contact {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
+
 .form-form {
     margin-top:5%;
 }
 
 .form-card {
     width: 90%;
+    height: fit-content;
     max-width: 600px;
-    margin-top:20px;
+    margin: auto;
+    padding-bottom: 20px;
 }
 
 .form-button {
@@ -33,5 +42,5 @@
 .input-mail:disabled {
         background-color: var(--input-disabled-background-color);
         border-color: var(--input-disabled-border-color);
-        color: nb-theme(color-basic-600)!important;
+        color: nb-theme(color-basic-700)!important;
 }

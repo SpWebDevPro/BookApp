@@ -1,0 +1,24 @@
+
+<div  fxLayout fxLayoutAlign="center">
+    <nb-card class="alert-card">
+        <nb-card-body class="alert-card-body" fxLayout="column" fxLayoutAlign="center">
+            <div fxLayout="column">
+                <p class="alert-p" *ngIf="alertMessage1">{{alertMessage1}}</p>
+                <p class="alert-p" *ngIf="alertMessage2">{{alertMessage2}} <img 
+                    src="./../../assets/icon_download_samsung .png"
+                    alt="icon action Ios"
+                    height="15px"
+                    width="15px"
+                /></p>
+                <p class="alert-p" *ngIf="alertMessage3">{{alertMessage3}} <img 
+                    src="./../../assets/icon_ios.png"
+                    alt="icon action Ios"
+                    height="15px"
+                    width="15px"
+                /></p>
+                <p class="alert-p" *ngIf="alertMessage4">{{alertMessage4}}</p>
+            </div>
+            <button fxFlexAlign="center" class="alert-btn" nbButton size="tiny" (click)="close()">fermer</button>
+        </nb-card-body>
+    </nb-card>
+</div>

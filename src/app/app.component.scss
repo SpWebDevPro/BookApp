@@ -13,3 +13,18 @@ nb-layout-column {
     text-align:center;
 }
 
+.footer-menu {
+    position: fixed;
+    width:100%;
+    bottom:0;
+    overflow: hidden;
+}
+
+[nbButton].appearance-filled.status-primary {
+    background-color: var(--button-filled-primary-background-color);
+    border-color: var(--button-filled-primary-border-color);
+    color: var(--button-filled-primary-text-color);
+}
+
+
+

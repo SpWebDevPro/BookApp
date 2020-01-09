@@ -6,6 +6,8 @@ import { Subscription } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
 import { PwaService } from './pwa.service';
 import { fadeAnimation } from './route-animation';
+import { AlertComponent } from './alert/alert.component';
+import { NbDialogService } from '@nebular/theme';
 
 
 @Component({
@@ -43,6 +45,19 @@ export class AppComponent implements OnInit, OnDestroy {
 
   deferredPrompt:any;
   btnAddApp:any;
+  userAgent:any;
+  isIos:any;
+  isStandaloneMode:any;
+  deviceInfo:any;
+  browser:any;
+
+  test:Boolean = true;
+
+  message1:string;
+  message2:string;
+  message3:string;
+  message4:string;
+  
   
 
 
@@ -51,10 +66,12 @@ export class AppComponent implements OnInit, OnDestroy {
     private router:Router,
     private authenticationService:AuthenticationService,
     private pwaService:PwaService,
+    private dialogService:NbDialogService,
     ){
     }
 
   ngOnInit(){
+    //handle app banner
     window.addEventListener('beforeinstallprompt', (event) => {
       console.log('beforeinstallprompt event has been fired', event);
       this.deferredPrompt = event;
@@ -62,6 +79,35 @@ export class AppComponent implements OnInit, OnDestroy {
       // return false;
       this.pwaService.dispatchPromptInstallEvent(event);
     })
+    this.userAgent = window.navigator.userAgent.toLowerCase();
+    console.log('userAgent:', this.userAgent);
+    this.browser = this.pwaService.checkBrowser();
+    this.isIos = /iphone|ipad|ipod/.test(this.userAgent);
+    console.log('isIos:', this.isIos);
+    this.isStandaloneMode = window.matchMedia('(display-mode:standalone)').matches;
+    console.log('this.isStandaloneMode:', this.isStandaloneMode);
+    if(this.isIos && !this.isStandaloneMode){
+      //here we should triger a pop up window explaining how to install app
+      this.message1 = 'Vous pouvez ajouter l\'application à votre écran d\'accueil :';
+      // this.message2 = 'Fermez ce message';
+      this.message3 = 'Appuyez sur l\'icône';
+      this.message4 = 'Sélectionnez : Sur l\'ecran d\'accueil';
+      this.openDialog(this.message1, null, this.message3, this.message4);
+    };
+    if (this.browser == 'Samsung Internet' && !this.isStandaloneMode) {
+      this.message1 = 'Vous pouvez ajouter l\'application à votre écran d\'accueil :';
+      this.message2 = 'Dans la barre d\'url, cliquez sur l\'icône';
+      this.message4 = 'Autorisez votre télephone à télécharger depuis cette source';
+      this.openDialog(this.message1, this.message2, null, this.message4);
+    }
+    // if(this.test){
+    //   this.message1 = 'Vous pouvez ajouter l\'application à votre écran d\'accueil :';
+    //   this.message2 = 'Dans la barre d\'url, cliquez sur l\'icône';
+    //   this.message4 = 'Puis, autorisez votre télephone à télécharger depuis cette source';
+    //   this.openDialog(this.message1, this.message2, null, this.message4);
+    // };
+
+    //app running
     this.dataStorageService.getStepsModelsFromWP();
     this.headerAndFooterDisabledSub = this.dataStorageService.change_headerAndFooterDisabled
       .subscribe( (hfNewDisplay) => {
@@ -73,11 +119,20 @@ export class AppComponent implements OnInit, OnDestroy {
       });
     this.btnNextIsDisabledSub = this.dataStorageService.change_NextButtonDisabled
       .subscribe((value:Boolean) => {
+        this.active_step_model = this.dataStorageService.getState().active_step_model;
+        console.log('this.active_step_model.name:', this.active_step_model);
+        if (this.active_step_model.name === 'verify'){
+            console.log('i am blured');
+            document.getElementById('next').blur();
+        }
         this.btnNextIsDisabled = value;
+       
       });
     this.btnPrevIsDisabledSub = this.dataStorageService.change_PrevButtonDisabled
       .subscribe((value:Boolean) => {
+        // document.getElementById('prev').blur();
         this.btnPrevIsDisabled = value;
+        
       });
     this.IsLoggedInSub = this.authenticationService.login_status
       .subscribe((value:Boolean) => {
@@ -120,6 +175,24 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onLogOut(){
     this.authenticationService.logOutUser();
+  }
+
+  onLogoClick(){
+      this.router.navigate(['/welcome']);
+      this.dataStorageService.displayHeaderAndFooter(true);
+  }
+
+  openDialog(message1:string, message2:string, message3:string, message4:string){
+    let dialogref;
+    return dialogref = this.dialogService.open(AlertComponent, {
+      context: {
+        alertMessage1:message1,
+        alertMessage2:message2,
+        alertMessage3:message3,
+        alertMessage4:message4
+      },
+      autoFocus:false
+    });
   }
 
   

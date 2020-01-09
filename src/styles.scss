@@ -10,10 +10,11 @@
 
 /*General Rules */
 
-.scrollDiv {
-  max-height: 100vh;
-  overflow: auto;
-}
+//Attention, pas rataché
+// .scrollDiv {
+//   max-height: 100vh;
+//   overflow: auto;
+// }
 
 // :host {
 //   overflow:hidden;
@@ -30,24 +31,36 @@
 // }
 
 
-/*rules for PWA*/
+
 body {
+  /*rules for PWA IOS*/
   -webkit-user-select:none;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
+
+  /*rules for the tap bar menu at bottom IOS*/
+  height: 100%;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+
+  /*rules for centering in safari*/
+  -webkit-box-pack:center;
+  -webkit-box-align:center;
+  overflow-x: hidden !important;
+  max-width: 100% !important;
 }
 
 /*Rules for cards */
 
-div.user-container {
-  width: 100%;
-}
+// div.user-container {
+//   width: 100%;
+// }
 
-div.info-container {
-  width: 100%;
-  margin-left: 5%!important;
-  margin-right: 3%;
-}
+// div.info-container {
+//   width: 100%;
+//   margin-left: 5%!important;
+//   margin-right: 3%;
+// }
 
 nb-user.size-large .user-title {
   text-align: left;
@@ -68,16 +81,26 @@ nb-card.accent {
 
 /*Rules for buttons / input */
 
+
+
 .appearance-filled {
   text-transform: none;
   min-width:135px;
+  // font-weight: var(button-text-font-weight) !important;
 }
 
-@media(max-width:350px){
-  .appearance-filled {
-    text-transform: none;
-  }
+[nbButton].size-medium {
+  font-weight: 700 !important;
 }
+
+[nbButton].size-small {
+  font-weight: 700 !important;
+}
+// @media(max-width:350px){
+//   .appearance-filled {
+//     text-transform: none;
+//   }
+// }
 
 .inactive {
   border-color: var(--button-filled-primary-disabled-border-color);

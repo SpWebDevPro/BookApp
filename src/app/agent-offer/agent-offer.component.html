@@ -1,6 +1,6 @@
 
-<div fxLayout="row" fxLayoutAlign="center">
-    <div class="agent-offer">
+<div class="agent" fxLayout="row" fxLayoutAlign="center">
+    <div class="agent-offer" fxLayout="column">
     <h6>{{step.description}}</h6>
     <app-agent-card [selectedCard]="selectedCard" [agent]="agent" *ngFor="let agent of agents" (click)="onSelectCard(agent)"></app-agent-card>
 </div>

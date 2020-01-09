@@ -2,7 +2,7 @@
   "name": "BookApp demo application",
   "short_name": "BookApp",
   "theme_color": "#549434",
-  "background_color": "#fafafa",
+  "background_color": "#549434",
   "display": "standalone",
   "description": "BookApp demo application de réservation en ligne",
   "lang": "fr",

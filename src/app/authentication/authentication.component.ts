@@ -109,6 +109,7 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
         errorMessageAuth:errMess,
         successMessageAuth:successMess
       },
+      autoFocus:false
     });
   }
 

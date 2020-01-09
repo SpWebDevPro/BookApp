@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { SlotPickerComponent } from './slot-picker/slot-picker.component';
 import { ContactComponent } from './contact/contact.component';
@@ -13,7 +13,13 @@ import { LodingSpinnerComponent } from './loding-spinner/loding-spinner.componen
 import { HandlingErrorsComponent } from './handling-errors/handling-errors.component';
 import { AuthGuard } from './authentication/auth-guard.service';
 import { Error404Component } from './error404/error404.component';
+import { AlertComponent } from './alert/alert.component';
 
+const routerOptions:ExtraOptions = {
+  anchorScrolling:'enabled',
+  scrollOffset: [0, 75],
+  // useHash:true,
+}
 
 const routes: Routes = [
   { path:'', component:InitComponent, data:{ state:'init'}},
@@ -28,12 +34,13 @@ const routes: Routes = [
   { path:'user', component:AuthenticationComponent, data: {state:'user'}},
   { path:'uimessage', component:HandlingErrorsComponent, data: {state:'uimessage'}},
   { path:'loding-spinner', component:LodingSpinnerComponent, data: {state:'loding-spinner'}},
+  { path:'alert', component:AlertComponent, data: {state:'alert'}},
   { path: '**', component:Error404Component}
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, routerOptions)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

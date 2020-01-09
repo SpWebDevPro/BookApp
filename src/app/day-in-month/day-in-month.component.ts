@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DataStorageService } from '../data-storage.service';
 import { HelperCalendarService } from '../helper-calendar.service';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-day-in-month',
@@ -20,6 +21,8 @@ export class DayInMonthComponent implements OnInit, OnDestroy {
   dataAvailableHours:any[];
   dataAvailableHour:any;
 
+  selectedId:Number;
+
   // dataNiceDate=dataDay.dataNiceDate
   // dataServiceDuration=dataDay.dataServiceDuration
   // dataTotaWorkMinutes=dataDay.dataTotalWorkMinutes
@@ -31,7 +34,8 @@ export class DayInMonthComponent implements OnInit, OnDestroy {
 
   constructor( 
     private dataStorageService:DataStorageService,
-    private helperCalendarService:HelperCalendarService
+    private helperCalendarService:HelperCalendarService,
+    private viewportScroller:ViewportScroller,
     ) { }
 
   ngOnInit() {
@@ -60,11 +64,15 @@ export class DayInMonthComponent implements OnInit, OnDestroy {
     this.displayBookingSelection = false;
   }
 
-  selectHour(day, AvailableHour){
+  selectHour(day, AvailableHour, i){
+    this.selectedId = null;
+    console.log('index:', i);
+    this.selectedId = i;
     this.displayBookingSelection = false;
     // console.log('selected Hour', AvailableHour );
     this.dataAvailableHour = AvailableHour;
     this.displayBookingSelection = true;
+    this.viewportScroller.scrollToAnchor('recap');
     this.dataStorageService.disableNextBtn(false);
     let startTimeInMin = this.helperCalendarService.convertHourstoMin(AvailableHour);
     let bookDataToPass = {
@@ -73,5 +81,7 @@ export class DayInMonthComponent implements OnInit, OnDestroy {
     };
     this.dataStorageService.collectBookingInfo(bookDataToPass);
   }
+
+
 
 }

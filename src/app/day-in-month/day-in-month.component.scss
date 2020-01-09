@@ -7,9 +7,40 @@
     margin: 2px;
 }
 
+.selected {
+    box-shadow: none;
+    outline: none;
+    color: nb-theme(color-primary-100) !important;
+    background-color: nb-theme(color-primary-500) !important;
+}
+
+
+
+
+
+[nbButton]:focus {
+    // box-shadow: 0 0 0 var(--button-outline-width) var(--button-filled-info-text-color);
+    box-shadow: none;
+    outline: none;
+    color: nb-theme(color-primary-100) !important;
+    background-color: nb-theme(color-primary-500) !important;
+}
+
+[nbButton]:active {
+    // box-shadow: 0 0 0 var(--button-outline-width) var(--button-filled-info-text-color);
+    box-shadow: none;
+    outline: none;
+    color: nb-theme(color-primary-100) !important;
+    background-color: nb-theme(color-primary-500) !important;
+}
+
 .dayAvailability {
     width: 100%;
     max-width: 600px;
+}
+
+#recap {
+    margin-bottom: 130px;
 }
 
 .divAvailableBtn{
@@ -20,4 +51,5 @@
     margin:auto;
     width:80%;
     text-align: center;
+    padding-bottom: 5px;
 }

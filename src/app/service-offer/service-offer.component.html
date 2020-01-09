@@ -1,5 +1,5 @@
-<div fxLayout="row" fxLayoutAlign="center">
-<div class="service-offer">
+<div class="service" fxLayout="row" fxLayoutAlign="center">
+<div class="service-offer" fxLayout="column">
     <h6>{{step.description}}</h6>
     <app-service-card [selectedCard]="selectedCard" [service]="service" *ngFor="let service of services" (click)="onSelectCard(service)"></app-service-card>
 </div>

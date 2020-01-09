@@ -2,9 +2,9 @@
 
   <nb-layout-header class="header" fixed *ngIf="!headerAndFooterDisabled" >
     <div>
-      <a [routerLink]="['/welcome']" routerLinkActive="router-link-active" >
-      <img src="../assets/logo.png" alt="logo" height="42">
-      </a>
+      <div (click)="onLogoClick()" >
+        <img src="../assets/logo.png" alt="logo" height="42">
+      </div>
     </div >
     <div class="header-menu" fxLayout="row" fxLayoutAlign="end">
       <!-- <button nbButton size="tiny" id="btnAddApp">Installer l'appli</button> -->
@@ -39,10 +39,10 @@
     <router-outlet></router-outlet>
   </nb-layout-column>
 
-  <nb-layout-footer fixed *ngIf="!headerAndFooterDisabled">
+  <nb-layout-footer fixed class="footer-menu" *ngIf="!headerAndFooterDisabled">
     <div *ngIf="!navButtonsDisabled" fxLayout="row" fxLayoutAlign="center" fxLayoutWrap="wrap" fxLayoutGap="20%" fxLayoutGap.xs="5%">
       <button nbButton size="small" id="prev" #btnLeft [disabled]="btnPrevIsDisabled" (click)="goStep(btnLeft)">Retour</button>
-      <button nbButton size="small" id="next" #btnRight [disabled]="btnNextIsDisabled" (click)="goStep(btnRight)">{{btnMenu}}</button>
+      <button class="regularBtn" nbButton size="small" id="next" #btnRight [disabled]="btnNextIsDisabled" (click)="goStep(btnRight)">{{btnMenu}}</button>
     </div>
   </nb-layout-footer>
 

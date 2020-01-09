@@ -37,6 +37,7 @@ import { environment } from '../environments/environment';
 import { PwaService } from './pwa.service';
 import { AuthGuard } from './authentication/auth-guard.service';
 import { Error404Component } from './error404/error404.component';
+import { AlertComponent } from './alert/alert.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { Error404Component } from './error404/error404.component';
     MinToHoursPipe,
     LodingSpinnerComponent,
     HandlingErrorsComponent,
-    Error404Component
+    Error404Component,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

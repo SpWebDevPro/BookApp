@@ -1,0 +1,29 @@
+@import '../../themes.scss';
+@import '../../styles.scss';
+
+
+.alert-card {
+    background-color: white;
+    width: 90%;
+    min-width: 300px;
+}
+
+.alert-card-body {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.alert-p {
+    margin-top:unset;
+}
+
+.alert-btn {
+    margin-top:5% !important;
+    text-transform: none;
+    min-width:none;
+    text-align: center;
+}
+
+// image_message2 {
+
+// }

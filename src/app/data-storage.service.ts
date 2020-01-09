@@ -216,8 +216,6 @@ export class DataStorageService {
         this.dispatchSelectedDayInfos(this.selected_day);
     }
     
-
-
 // ****Calling API and getting back datas****
 
     //return the url for the http call, based on the route(=step) set as parameter
@@ -424,6 +422,7 @@ export class DataStorageService {
             errorMessageAuth:errMess,
             successMessageAuth:successMess
           },
+          autoFocus:false
         });
       }
 

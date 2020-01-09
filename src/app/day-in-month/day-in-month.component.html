@@ -1,16 +1,18 @@
 
-
+<div fxLayout="column" fxLayoutGap="10px">
 <nb-card class="dayAvailability" *ngIf="displayDayAvailability">
-<nb-card-body >
-<h6>Horaires disponibles pour le {{dataDay.dataDate | date:'dd MMM yyyy'}}</h6>
-<div class="divAvailableBtn"*ngFor="let dataAvailableHour of dataAvailableHours">
-        <button class="availableBtn" nbButton outline size="small" (click)="selectHour(dataDay.dataDate, dataAvailableHour)">{{dataAvailableHour}}</button>
-</div>
-</nb-card-body>
+        <nb-card-body >
+                <h6 class="recap">Horaires disponibles pour le {{dataDay.dataDate | date:'dd MMM yyyy'}}</h6>
+                <div class="divAvailableBtn" *ngFor="let dataAvailableHour of dataAvailableHours, let i = index" >
+                        <button [ngClass]=" selectedId === i? 'availableBtn selected' :'availableBtn'" nbButton outline size="small" (click)="selectHour(dataDay.dataDate, dataAvailableHour, i)">{{dataAvailableHour}}</button>
+                </div>
+        </nb-card-body>
 </nb-card>
 <nb-card *ngIf="displayBookingSelection" class="dayAvailability">
-<nb-card-body >
-        <h6 class="recap">Vous avez selectionné {{dataAvailableHour}}H le {{dataDay.dataDate | date:'dd MMM yyyy'}}</h6>
-</nb-card-body>
+        <nb-card-body >
+                <h6 class="recap">Vous avez selectionné {{dataAvailableHour}}H le {{dataDay.dataDate | date:'dd MMM yyyy'}}</h6>
+        </nb-card-body>
 </nb-card>
+</div>
+<div id="recap"></div>
 
