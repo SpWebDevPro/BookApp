@@ -1,14 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { SwUpdate } from '@angular/service-worker';
 
 @Injectable()
 export class PwaService {
 
     catched_prompt_installation = new Subject<any>();
+    advise_new_version_available = new Subject<any>();
 
-    constructor(private swUpdate:SwUpdate){
+    constructor(){
     }
+
+    PromtNewVersion(value:Boolean){
+      return this.advise_new_version_available.next(value)
+    }
+    
 
     dispatchPromptInstallEvent(value:any){
         // console.log('the event is dispatched from pwa', value);
@@ -30,16 +36,6 @@ export class PwaService {
             deferredPrompt = null;
           })
       }
-
-    promptUpdateTheApp(){
-        if (this.swUpdate.isEnabled){
-            this.swUpdate.available.subscribe(() => {
-                if (confirm("Une nouvelle version de l'application est disponible, souhaitez vous effectuer la mise à jour?")){
-                    window.location.reload();
-                }
-            })
-        }
-    }
 
 
     checkBrowser(){

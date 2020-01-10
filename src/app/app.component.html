@@ -1,6 +1,6 @@
 <nb-layout class="main-layout" >
 
-  <nb-layout-header class="header" fixed *ngIf="!headerAndFooterDisabled" >
+  <nb-layout-header class="header" fixed *ngIf="!headerAndFooterDisabled && !headerDisabled" >
     <div>
       <div (click)="onLogoClick()" >
         <img src="../assets/logo.png" alt="logo" height="42">
@@ -40,6 +40,24 @@
   </nb-layout-column>
 
   <nb-layout-footer fixed class="footer-menu" *ngIf="!headerAndFooterDisabled">
+
+    <!-- advise new version available -->
+    <div *ngIf="newVersionAvailable" fxLayout="column" >
+        <div class="divclosingbtn">
+            <button class="btn-close" nbButton ghost (click)="closeDivNewVersion()"><i class="material-icons md-18 discret icon-close" >clear</i></button>
+        </div>
+        <div class="adviseNewVersion">
+            <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
+                <img class="icon-logo" fxFlexAlign="center" src="../assets/icons/icon-72x72.png" alt="logo" height="30px" width="30px">
+                <p class="paragraph-2 p-adviseNewVersion" >Une nouvelle version de l'application est disponible</p>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center">
+              <button nbButton class="btn-newVersionAvailable" size="tiny" (click)="updateVersion()"> Mettre à jour</button>
+            </div>
+        </div>
+      </div>
+
+    <!-- Navigation -->
     <div *ngIf="!navButtonsDisabled" fxLayout="row" fxLayoutAlign="center" fxLayoutWrap="wrap" fxLayoutGap="20%" fxLayoutGap.xs="5%">
       <button nbButton size="small" id="prev" #btnLeft [disabled]="btnPrevIsDisabled" (click)="goStep(btnLeft)">Retour</button>
       <button class="regularBtn" nbButton size="small" id="next" #btnRight [disabled]="btnNextIsDisabled" (click)="goStep(btnRight)">{{btnMenu}}</button>

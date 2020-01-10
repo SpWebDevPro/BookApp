@@ -26,5 +26,29 @@ nb-layout-column {
     color: var(--button-filled-primary-text-color);
 }
 
+.icon-logo {
+    margin-left: 20px;
+}
+
+.btn-newVersionAvailable {
+    margin:auto;
+    margin-top:10px;
+    margin-bottom: 20px;
+}
+
+.btn-close {
+    float: right;
+    padding-top: 4px !important;
+    padding-right: 4px !important;
+    padding-bottom: 0 !important;
+}
+
+.icon-close {
+    margin:unset;
+}
+
+.p-adviseNewVersion {
+    text-align: left;
+}
 
 

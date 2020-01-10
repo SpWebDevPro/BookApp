@@ -70,7 +70,7 @@ export class DataStorageService {
     
 // ****functions related to display****
 
-
+    // false : will display header and footer
     displayHeaderAndFooter(value:Boolean) {
         return this.change_headerAndFooterDisabled.next(value);
     }
@@ -122,6 +122,7 @@ export class DataStorageService {
     //redirect to the component matching the step
     displayStep(step){
         this.router.navigate([step]);
+        this.displayHeaderAndFooter(false);
     }
 
     checkStepToDisplay(){
@@ -302,13 +303,7 @@ export class DataStorageService {
 
     getFirstStepFromWP(){
         let url = this.getEndPointUrl('firstStep');
-        // let httpOptions = {
-        //     headers : new HttpHeaders({
-        //         'Content-Type': 'application/json'
-        //     })
-        // }
         return this.http
-            // .get(url, httpOptions)
             .get(url)
             .pipe(
                 tap((response) => {
@@ -341,13 +336,7 @@ export class DataStorageService {
     
     getStepsModelsFromWP(){
         let url = this.getEndPointUrl('start');
-        // let httpOptions = {
-        //     headers : new HttpHeaders({
-        //         'Content-Type': 'application/json',
-        //     })
-        // }
         return this.http
-            // .get(url, httpOptions)
             .get(url)
             .pipe(
                 tap((response) => {
