@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DataStorageService } from '../data-storage.service';
-import { Step } from '../step.model';
+import { Step } from '../_Models/step.model';
 import { Subscription } from 'rxjs';
 import { Meta } from '@angular/platform-browser';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-slot-picker',
@@ -18,6 +19,8 @@ export class SlotPickerComponent implements OnInit {
   btnMonthNextDisabled:Boolean = false;
 
   state:any;
+  stateChangeSub:Subscription;
+
   step:Step;
   vars_for_view:any;
   datePickerCurrent:any;
@@ -34,22 +37,29 @@ export class SlotPickerComponent implements OnInit {
 
   constructor( 
     private dataStorageService:DataStorageService,
-    private meta:Meta
+    private meta:Meta,
+    private viewportScroller:ViewportScroller,
     ) { }
 
   ngOnInit() {
     this.state = this.dataStorageService.getState();
+    this.stateChangeSub = this.dataStorageService.change_state.subscribe(
+      (state) => { 
+        this.step = this.state.active_step_model;
+        this.vars_for_view = this.state.vars_for_view;
+        this.datePickerCurrent = this.state.vars_for_view.datePicker_data[0];
+        this.datePickerAll = this.state.vars_for_view.datePicker_data;
+        this.hebdoDays = this.datePickerCurrent.dataToReturnMonth.hebdoDays;
+        this.dataToReturnDays = this.dataReadyForNgFor(this.datePickerCurrent.dataToReturnDays);
+      });
     this.step = this.state.active_step_model;
     this.vars_for_view = this.state.vars_for_view;
     this.brand_company = this.dataStorageService.myBrand.company;
     this.datePickerCurrent = this.state.vars_for_view.datePicker_data[0];
     this.datePickerAll = this.state.vars_for_view.datePicker_data;
-    // this.dataCalendarYear = this.datePickerCurrent.dataToReturnMonth.dataCalendarYear;
     this.hebdoDays = this.datePickerCurrent.dataToReturnMonth.hebdoDays;
     this.dataToReturnDays = this.dataReadyForNgFor(this.datePickerCurrent.dataToReturnDays);
-    // console.log('this.datePickerCurrent',this.datePickerCurrent );
-    // console.log('this.dataToReturnDays:', this.dataToReturnDays);
-    // console.log('this.datePickerAll:', this.datePickerAll);
+    
     this.dataStorageService.displayNavButtonDiv(false);
     this.errorAdviseMessage = this.dataStorageService.advise_errorMessage_ds.subscribe(
       (error) => {
@@ -65,6 +75,7 @@ export class SlotPickerComponent implements OnInit {
 
   onSelectDay(day){
     this.dataStorageService.getSelectedDay(day);
+    this.viewportScroller.scrollToAnchor('next');
   }
 
   dataReadyForNgFor(arrayOfObject){
@@ -113,6 +124,11 @@ export class SlotPickerComponent implements OnInit {
         this.dataStorageService.dispatchChangeMonth(true);
       }
     }
+  }
+
+  ngOnDestroy():void {
+    this.stateChangeSub.unsubscribe();
+    this.errorAdviseMessage.unsubscribe();
   }
 
 }

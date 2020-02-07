@@ -10,11 +10,7 @@
 
 /*General Rules */
 
-//Attention, pas rataché
-// .scrollDiv {
-//   max-height: 100vh;
-//   overflow: auto;
-// }
+//to consider for animation
 
 // :host {
 //   overflow:hidden;
@@ -52,15 +48,6 @@ body {
 
 /*Rules for cards */
 
-// div.user-container {
-//   width: 100%;
-// }
-
-// div.info-container {
-//   width: 100%;
-//   margin-left: 5%!important;
-//   margin-right: 3%;
-// }
 
 nb-user.size-large .user-title {
   text-align: left;
@@ -77,11 +64,7 @@ nb-card.accent {
 
 
 
-
-
 /*Rules for buttons / input */
-
-
 
 .appearance-filled {
   text-transform: none;
@@ -96,11 +79,6 @@ nb-card.accent {
 [nbButton].size-small {
   font-weight: 700 !important;
 }
-// @media(max-width:350px){
-//   .appearance-filled {
-//     text-transform: none;
-//   }
-// }
 
 .inactive {
   border-color: var(--button-filled-primary-disabled-border-color);
@@ -112,6 +90,7 @@ nb-card.accent {
   border-color: var(--input-focus-border-color);
   box-shadow: 0 0 0 var(--input-outline-width) nb-theme(color-primary-100);
 }
+
 
 /*Rules for the icon */
 
@@ -127,7 +106,7 @@ nb-card.accent {
 }
 
 .material-icons.primary { color:nb-theme(color-primary-500)};
-.material-icons.discret { color:nb-theme(color-basic-500)};
+.material-icons.discret { color:nb-theme(color-basic-600)};
 
 
 /*Rules for UI messages */

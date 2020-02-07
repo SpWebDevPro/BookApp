@@ -2,14 +2,11 @@
 @import '../../themes.scss';
 
 
-// .test {
-//     height: 500px;
-//     background-color: #2d54de;
-// }
+//only for scroll
+#next {
+    height: 20%;
+}
 
-// #recap {
-//     margin-bottom: 100px;
-// }
 
 .slotpicker {
     width: 100%;
@@ -18,16 +15,15 @@
 }
 
 
-
 .calendar {
     width: 95%;
-    max-width: 600px;
+    max-width: 400px;
     margin-top:20px;
 }
 
 .dayAvailabilities {
     width: 95%;
-    max-width: 600px;
+    max-width: 400px;
     margin-top:20px;
 }
 
@@ -63,111 +59,11 @@
     background-color: #fffef2
 }
 
-// .os-current-month-label-w {
-//     position: relative
-// }
-
 .month-label {
     margin:auto;
     text-align: center;
 }
 
-// .os-current-month-label-w .os-month-prev-btn,
-// .os-current-month-label-w .os-month-next-btn {
-//     position: absolute;
-//     border: none;
-//     font-size: 14px;
-//     background-color: transparent;
-//     box-shadow: none;
-//     outline: none;
-//     color: #111;
-//     top: 55%;
-//     transform: translateY(-50%);
-//     padding: 0px;
-//     margin: 0px;
-//     line-height: 1;
-//     vertical-align: middle;
-//     display: inline-block;
-//     cursor: pointer
-// }
-
-// .os-current-month-label-w .os-month-prev-btn.os-loading,
-// .os-current-month-label-w .os-month-next-btn.os-loading {
-//     color: transparent !important
-// }
-
-// .os-current-month-label-w .os-month-prev-btn.os-loading span,
-// .os-current-month-label-w .os-month-prev-btn.os-loading i,
-// .os-current-month-label-w .os-month-next-btn.os-loading span,
-// .os-current-month-label-w .os-month-next-btn.os-loading i {
-//     color: transparent !important
-// }
-
-// .os-current-month-label-w .os-month-prev-btn.os-loading:after,
-// .os-current-month-label-w .os-month-next-btn.os-loading:after {
-//     display: block;
-//     content: "";
-//     width: 14px;
-//     height: 14px;
-//     border-bottom: 2px solid #1f222b;
-//     border-left: 2px solid #1f222b;
-//     border-top: 2px solid #1f222b;
-//     border-right: 2px solid rgba(0, 0, 0, 0);
-//     border-radius: 20px;
-//     position: absolute;
-//     top: 50%;
-//     left: 50%;
-//     transform: translate(-50%, -50%);
-//     animation: os-loading 700ms infinite linear
-// }
-
-// .os-current-month-label-w .os-month-prev-btn:hover,
-// .os-current-month-label-w .os-month-next-btn:hover {
-//     color: #2d54de
-// }
-
-// .os-current-month-label-w .os-month-prev-btn:focus,
-// .os-current-month-label-w .os-month-next-btn:focus {
-//     outline: none
-// }
-
-// .os-current-month-label-w .os-month-prev-btn.disabled,
-// .os-current-month-label-w .os-month-next-btn.disabled {
-//     color: rgba(0, 0, 0, 0.1)
-// }
-
-// .os-current-month-label-w .os-month-prev-btn {
-//     left: 10px
-// }
-
-// .os-current-month-label-w .os-month-next-btn {
-//     right: 10px
-// }
-
-// .os-current-month-label-w .os-current-month-label {
-//     text-align: center;
-//     font-weight: 500;
-//     letter-spacing: 2px;
-//     font-size: 16px;
-//     margin-bottom: 10px;
-//     color: #1f222b
-// }
-
-
-
-//!!!!!not sure if need to comment this
-
-// .os-monthly-calendar-days-w {
-//     display: none
-// }
-
-// .os-monthly-calendar-days-w.active {
-//     display: block
-// }
-
-// .step-datepicker-w {
-//     padding: 0px 30px
-// }
 
 .os-monthly-calendar-days {
     display: flex;

@@ -39,17 +39,49 @@
     <router-outlet></router-outlet>
   </nb-layout-column>
 
-  <nb-layout-footer fixed class="footer-menu" *ngIf="!headerAndFooterDisabled">
+  <nb-layout-footer fixed class="footer-menu" *ngIf="!headerAndFooterDisabled" >
+    <!-- mettre une classe dynamique pour réduire le padding quand seules les bannières s'affichent -->
+  <div fxLayout="column" fxLayoutAlign="center">
+
+    <!-- Install banner sticky bottom menu -->
+      <div class="Install-banner" *ngIf="installBannerForIos || installBannerForSamsungInternet" fxLayout="column" fxLayoutAlign="center">
+          <div class="divclosingbtn">
+              <button class="btn-close" nbButton ghost (click)="closeInstallBanner()"><i class="material-icons md-18 discret icon-close" >clear</i></button>
+          </div>
+          <div class="divinfo" fxLayout="column" fxLayoutAlign="center">
+              <div class="advise-app-install" fxLayout="column">
+                  <div class="message-plus-applogo-div" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
+                      <img class="icon-logo" fxFlexAlign="center" src="../assets/icons/icon-72x72.png" alt="logo" height="40px" width="40px">
+                      <p fxLayoutAlign="center" class="paragraph p-stickybanner" >{{message1}}</p>
+                  </div>
+                  <p class="paragraph p-stickybanner secondary-message" *ngIf="message2">{{message2}} <img 
+                      src="./../assets/icon_download_samsung.png"
+                      alt="icon download pwa Samsung"
+                      height="20px"
+                      width="20px"
+                  /></p>
+                  <p class="paragraph p-stickybanner secondary-message" *ngIf="message3">{{message3}} <img 
+                      src="./../assets/icon_ios.png"
+                      alt="icon action Ios"
+                      height="20px"
+                      width="20px"
+                  /></p>
+                  <p class="paragraph p-stickybanner secondary-message" *ngIf="message4">{{message4}}</p>
+              </div>
+              <!-- <button fxFlexAlign="center" class="alert-btn" nbButton size="tiny" (click)="close()">fermer</button> -->
+          </div>
+      </div>
+
 
     <!-- advise new version available -->
-    <div *ngIf="newVersionAvailable" fxLayout="column" >
+    <div class="NewVersion" *ngIf="newVersionAvailable" fxLayout="column" >
         <div class="divclosingbtn">
             <button class="btn-close" nbButton ghost (click)="closeDivNewVersion()"><i class="material-icons md-18 discret icon-close" >clear</i></button>
         </div>
-        <div class="adviseNewVersion">
-            <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
-                <img class="icon-logo" fxFlexAlign="center" src="../assets/icons/icon-72x72.png" alt="logo" height="30px" width="30px">
-                <p class="paragraph-2 p-adviseNewVersion" >Une nouvelle version de l'application est disponible</p>
+        <div class="adviseNewVersion divinfo">
+            <div fxLayout="row" fxLayoutGap="10px">
+                <img class="icon-logo" fxFlexAlign="center" src="../assets/icons/icon-72x72.png" alt="logo" height="40px" width="40px">
+                <p class="paragraph p-stickybanner" >Une nouvelle version de l'application est disponible</p>
             </div>
             <div fxLayout="row" fxLayoutAlign="center">
               <button nbButton class="btn-newVersionAvailable" size="tiny" (click)="updateVersion()"> Mettre à jour</button>
@@ -62,6 +94,7 @@
       <button nbButton size="small" id="prev" #btnLeft [disabled]="btnPrevIsDisabled" (click)="goStep(btnLeft)">Retour</button>
       <button class="regularBtn" nbButton size="small" id="next" #btnRight [disabled]="btnNextIsDisabled" (click)="goStep(btnRight)">{{btnMenu}}</button>
     </div>
+  </div>
   </nb-layout-footer>
 
 </nb-layout>

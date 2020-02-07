@@ -7,6 +7,10 @@
     margin: auto;
 }
 
+.step-description{
+    margin: 15px !important;
+    margin-top: 30px !important;
+}
 
 .form-form {
     margin-top:5%;
@@ -17,7 +21,7 @@
     height: fit-content;
     max-width: 600px;
     margin: auto;
-    padding-bottom: 20px;
+    margin-top: 20px;
 }
 
 .form-button {
@@ -26,7 +30,7 @@
 }
 
 .form-valid {
-    margin-top: 10%;
+    margin-top: 5px;
     width: 100%;
 }
 
@@ -43,4 +47,8 @@
         background-color: var(--input-disabled-background-color);
         border-color: var(--input-disabled-border-color);
         color: nb-theme(color-basic-700)!important;
+}
+
+.onlyforscroll {
+    padding-bottom: 100px;
 }

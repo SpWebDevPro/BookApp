@@ -26,8 +26,15 @@ nb-layout-column {
     color: var(--button-filled-primary-text-color);
 }
 
-.icon-logo {
-    margin-left: 20px;
+
+
+.advise-app-install{
+    margin-bottom:20px;
+}
+
+.divinfo {
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
 .btn-newVersionAvailable {
@@ -38,17 +45,35 @@ nb-layout-column {
 
 .btn-close {
     float: right;
-    padding-top: 4px !important;
-    padding-right: 4px !important;
-    padding-bottom: 0 !important;
+    // padding-top: 4px !important;
+    // padding-right: 4px !important;
+    // padding-bottom: 0 !important;
+    padding:0 !important;
 }
 
 .icon-close {
     margin:unset;
 }
 
-.p-adviseNewVersion {
+.message-plus-applogo-div {
+    margin-bottom:10px;
+}
+
+.p-stickybanner {
     text-align: left;
 }
 
+.secondary-message {
+    margin: 2px !important;
+}
 
+.alert-p {
+    margin-top:unset;
+}
+
+.alert-btn {
+    margin-top:5% !important;
+    text-transform: none;
+    min-width:none;
+    text-align: center;
+}

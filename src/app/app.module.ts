@@ -25,7 +25,7 @@ import { DayInMonthComponent } from './day-in-month/day-in-month.component';
 import { VerifyComponent } from './verify/verify.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
-import { AuthenticationService } from './authentication.service';
+import { AuthenticationService } from './authentication/authentication.service';
 import { TokenInterceptor } from './authentication/token-interceptor.service'
 import { HelperCalendarService } from './helper-calendar.service';
 import { MinToHoursPipe } from './mintohours.pipe';
@@ -38,6 +38,8 @@ import { PwaService } from './pwa.service';
 import { AuthGuard } from './authentication/auth-guard.service';
 import { Error404Component } from './error404/error404.component';
 import { AlertComponent } from './alert/alert.component';
+import { dbService } from './indexeddb.service';
+import { NavigationService } from './navigation.service';
 
 
 @NgModule({
@@ -76,7 +78,9 @@ import { AlertComponent } from './alert/alert.component';
     DataStorageService,
     AuthenticationService,
     HelperCalendarService,
+    NavigationService,
     PwaService,
+    dbService,
     AuthGuard,
     {provide: HTTP_INTERCEPTORS, useClass:TokenInterceptor, multi:true}
   ],

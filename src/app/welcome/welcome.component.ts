@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataStorageService } from '../data-storage.service';
-import { Step } from '../step.model';
-import { AuthenticationService } from '../authentication.service';
+import { Step } from '../_Models/step.model';
+import { AuthenticationService } from '../authentication/authentication.service';
 import { PwaService } from '../pwa.service';
 import { Subscription } from 'rxjs';
 import { Meta } from '@angular/platform-browser';
@@ -14,6 +14,9 @@ import { Meta } from '@angular/platform-browser';
 })
 export class WelcomeComponent implements OnInit, OnDestroy {
 
+  IsLoggedInSub:Subscription;
+  isLoggedIn:Boolean;
+  
   brand_Name_Application:string;
   brand_welcome_message:string;
   brand_company:string
@@ -33,15 +36,23 @@ export class WelcomeComponent implements OnInit, OnDestroy {
    ){}
 
   ngOnInit() {
+
+    this.dataStorageService.displayHeaderAndFooter(true);
+
+    this.catched_prompt_installation_sub = this.pwaService.catched_prompt_installation.subscribe((event)=>{
+      this.deferredPrompt = event;
+    });
+
+    this.IsLoggedInSub = this.authenticationService.login_status
+    .subscribe((value:Boolean) => {
+      this.isLoggedIn = value;
+      console.log('From welcome cpt, this.isLoggedIn :', this.isLoggedIn);
+    });
+    this.authenticationService.isLoggedIn();
+
     this.brand_Name_Application = this.dataStorageService.myBrand.name;
     this.brand_welcome_message = this.dataStorageService.myBrand.welcome;
     this.brand_company = this.dataStorageService.myBrand.company;
-    this.catched_prompt_installation_sub = this.pwaService.catched_prompt_installation.subscribe((event)=>{
-      this.deferredPrompt = event;
-      // console.log('in welcome component, i catch this.deferedpromt:', this.deferredPrompt);
-    });
-    // console.log('deferredPrompt:', this.deferredPrompt);
-    // console.log('displayAppBtn:', this.displayAppBtn);
     this.meta.addTags([
       {
         name:'description',
@@ -52,22 +63,29 @@ export class WelcomeComponent implements OnInit, OnDestroy {
         content:`${this.brand_company}`
       },
     ])
-    // this.dataStorageService.displayHeaderAndFooter(false);
+  
   }
 
-  ngOnDestroy(){
-    this.catched_prompt_installation_sub.unsubscribe();
-  }
-
-  toAuthenticate(){
-    if (this.authenticationService.isLoggedIn){ this.authenticationService.logOutUser() };
-    this.authenticationService.goToAuthenticate();
+  startProcess(){
+    if (this.isLoggedIn){ 
+      console.log('ok je suis loggedIN');
+      this.authenticationService.getFirstStep();
+      //est ce que j'ai bien mes infos mails?
+    }
+    else {
+      this.authenticationService.goToAuthenticate();
+    }
   }
 
   promptInstall(){
     // console.log('je clic sur installer l appli');
     this.displayAppBtn = false;
     this.pwaService.promptInstallation(this.deferredPrompt);
+  }
+
+  ngOnDestroy(){
+    this.catched_prompt_installation_sub.unsubscribe();
+    this.IsLoggedInSub.unsubscribe();
   }
 
 }

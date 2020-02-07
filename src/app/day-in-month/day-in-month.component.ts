@@ -23,15 +23,6 @@ export class DayInMonthComponent implements OnInit, OnDestroy {
 
   selectedId:Number;
 
-  // dataNiceDate=dataDay.dataNiceDate
-  // dataServiceDuration=dataDay.dataServiceDuration
-  // dataTotaWorkMinutes=dataDay.dataTotalWorkMinutes
-  // dataWorkStartTime=dataDay.dataWorkStartTime
-  // dataWorkEndTime=dataDay.dataWorkEndTime
-  // dataAvailableMinutes=dataDay.dataAvailableMinutes
-  // dataDayMinutes=dataDay.dataDayMinutes
-  // DataInterval=dataDay.dataInterval
-
   constructor( 
     private dataStorageService:DataStorageService,
     private helperCalendarService:HelperCalendarService,
@@ -48,8 +39,6 @@ export class DayInMonthComponent implements OnInit, OnDestroy {
       this.dataAvailableHours = this.dataAvailableMinutes.map((e)=>{
         return this.helperCalendarService.convertMinToHours(parseInt(e,10));
       })
-      // console.log('this.dataAvailableMinutes', this.dataAvailableMinutes);
-      // console.log('this.dataAvailableHours', this.dataAvailableHours);
     })
     this.monthChanged = this.dataStorageService.change_month
     .subscribe((value) => {
@@ -69,7 +58,6 @@ export class DayInMonthComponent implements OnInit, OnDestroy {
     console.log('index:', i);
     this.selectedId = i;
     this.displayBookingSelection = false;
-    // console.log('selected Hour', AvailableHour );
     this.dataAvailableHour = AvailableHour;
     this.displayBookingSelection = true;
     this.viewportScroller.scrollToAnchor('recap');

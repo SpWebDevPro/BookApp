@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DataStorageService } from '../data-storage.service';
-import { Step } from '../step.model';
+import { Step } from '../_Models/step.model';
 import { Subscription } from 'rxjs';
 import { Meta } from '@angular/platform-browser';
 
@@ -11,7 +11,9 @@ import { Meta } from '@angular/platform-browser';
 })
 export class AgentOfferComponent implements OnInit {
 
-  state:any
+  state:any;
+  stateChangeSub:Subscription;
+
   step:Step;
   vars_for_view:any;
   agents:any;
@@ -30,6 +32,13 @@ export class AgentOfferComponent implements OnInit {
   ngOnInit() {
     this.dataStorageService.displayNavButtonDiv(false);
     this.state = this.dataStorageService.getState();
+    this.stateChangeSub = this.dataStorageService.change_state.subscribe(
+      (state) => { 
+        this.state = state;
+        this.step = this.state.active_step_model;
+        this.vars_for_view = this.state.vars_for_view;
+        this.agents = this.state.vars_for_view.agents;
+      });
     this.step = this.state.active_step_model;
     this.vars_for_view = this.state.vars_for_view;
     this.agents = this.state.vars_for_view.agents;
@@ -53,6 +62,11 @@ export class AgentOfferComponent implements OnInit {
       agent_id:this.selectedCard.id
     };
     this.dataStorageService.collectBookingInfo(bookDataToPass);
+  }
+
+  ngOnDestroy():void {
+    this.stateChangeSub.unsubscribe();
+    this.errorAdviseMessage.unsubscribe();
   }
 
 }

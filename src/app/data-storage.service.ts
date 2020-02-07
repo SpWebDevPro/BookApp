@@ -1,16 +1,17 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Subject } from "rxjs";
-import { Step } from './step.model';
+import { Step } from './_Models/step.model';
 import { Router } from '@angular/router';
-import { Booking } from './booking.model';
-import { Restrictions } from './restrictions.model';
-import { Brand } from './brand.model';
+import { Booking } from './_Models/booking.model';
+import { Restrictions } from './_Models/restrictions.model';
+import { Brand } from './_Models/brand.model';
 import { tap } from 'rxjs/operators';
-import { Customer } from './customer.model';
+import { Customer } from './_Models/customer.model';
 import { HandlingErrorsComponent } from './handling-errors/handling-errors.component';
 import { NbDialogService } from '@nebular/theme';
 import { environment } from 'src/environments/environment';
+import { dbService } from './indexeddb.service';
 
 
 
@@ -18,6 +19,9 @@ import { environment } from 'src/environments/environment';
 export class DataStorageService {
 
     myBrand = new Brand(environment.name,environment.welcome,'','',environment.baseUrlApi, environment.company, environment.bye)
+
+    state:any;
+    change_state = new Subject<Boolean>();
 
     //variables from backend
     steps_models:Step[];
@@ -53,6 +57,7 @@ export class DataStorageService {
     is_Loading_data:Boolean;
     change_is_Loading_data = new Subject<Boolean>();
     change_btnMenu = new Subject<string>();
+    advise_recieved_response_from_server = new Subject<any>();
 
     errorMessage:string;
     advise_errorMessage_ds = new Subject<string>();
@@ -64,7 +69,7 @@ export class DataStorageService {
         private http:HttpClient,
         private router:Router,
         private dialogService:NbDialogService,
-        // private authenticationService:AuthenticationService
+        private dbService: dbService
     ){}
 
     
@@ -111,6 +116,14 @@ export class DataStorageService {
         return this.change_month.next(value);
     }
 
+    dispatchResponseReceived(value:any){
+        return this.advise_recieved_response_from_server.next(value);
+    }
+
+    dispatchNewState(value:any){
+        return this.change_state.next(value);
+    }
+
     GetStepModelFromStepName(stepName){
         for (let i=0; i<this.steps_models.length; i++){
             if (stepName == this.steps_models[i].name){
@@ -145,7 +158,7 @@ export class DataStorageService {
 
     //comunicate to componennt the data from the store at a given state
     getState(){
-        let state = {
+        this.state = {
             show_next_btn:this.show_next_btn,
             show_prev_btn:this.show_prev_btn,
             is_first_step:this.is_first_step,
@@ -157,7 +170,14 @@ export class DataStorageService {
             restrictions:this.restrictions,
             active_step_model:this.active_step_model,
         };
-        return state;
+        return this.state;
+    }
+
+    setStateFromIdb(state){
+        this.state = state;
+        //advise components that the state has changed
+        this.dispatchNewState(this.state);
+        console.log( "this.state has been updated in data storage:", this.state);
     }
     
     //communicate from component to the Store the changed datas with customer action
@@ -279,6 +299,7 @@ export class DataStorageService {
                     // let dataa = receivedData["data"];
                     // let data = dataa.data;
                     let data = receivedData["data"];
+                    // this.dispatchResponseReceived(data);
                     this.show_next_btn = data["show_next_btn"];
                     this.show_prev_btn = data["show_prev_btn"];
                     this.is_first_step = data["is_first_step"];
@@ -314,6 +335,7 @@ export class DataStorageService {
                     // let dataa = receivedData["data"];
                     // let data = dataa.data;
                     let data = receivedData["data"];
+                    // this.dispatchResponseReceived(data);
                     this.show_next_btn = data["show_next_btn"];
                     this.show_prev_btn = data["show_prev_btn"];
                     this.is_first_step = data["is_first_step"];
@@ -347,9 +369,14 @@ export class DataStorageService {
                 // let dataa = receivedData["data"];
                 // let data = dataa.data;
                 let data = receivedData["data"];
+                // this.dispatchResponseReceived(data);
                 this.steps_models = data["steps_models"];
+                // this.dbService.addStepsToDataBase(this.steps_models);
                 this.booking = data["booking"];
+                // this.dbService.addBookingToDataBase(this.booking);
                 this.restrictions = data["restrictions"];
+                // this.dbService.addRestrictionToDataBase(this.restrictions);
+                
                 },
                 error => this.handleErrors(error)
             )

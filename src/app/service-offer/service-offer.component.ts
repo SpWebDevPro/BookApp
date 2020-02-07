@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataStorageService } from '../data-storage.service';
-import { Step } from '../step.model';
-import { Subscription } from 'rxjs';
+import { Step } from '../_Models/step.model';
+import { Subscription, Observable } from 'rxjs';
 import { Meta } from '@angular/platform-browser';
 
 
@@ -12,7 +12,9 @@ import { Meta } from '@angular/platform-browser';
 })
 export class ServiceOfferComponent implements OnInit {
 
-  state:any
+  state:any;
+  stateChangeSub:Subscription;
+
   step:Step;
   vars_for_view:any;
   services:any;
@@ -29,21 +31,33 @@ export class ServiceOfferComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.dataStorageService.displayNavButtonDiv(false);
+
     this.state = this.dataStorageService.getState();
     this.step = this.state.active_step_model;
     this.vars_for_view = this.state.vars_for_view;
     this.services = this.state.vars_for_view.services;
+
+    this.stateChangeSub = this.dataStorageService.change_state.subscribe(
+      (state) => { 
+        this.state = state;
+        this.step = this.state.active_step_model;
+        this.vars_for_view = this.state.vars_for_view;
+        this.services = this.state.vars_for_view.services;
+    });
+    
     this.brand_company = this.dataStorageService.myBrand.company;
-    this.dataStorageService.displayNavButtonDiv(false);
+    this.meta.addTags([
+      { name:'description',content:`${this.step.sub_title}`},
+      { name:'author',content:`${this.brand_company}`}
+    ])
+
     this.errorAdviseMessage = this.dataStorageService.advise_errorMessage_ds.subscribe(
       (error) => {
         this.dataStorageService.openDialog(error, null);
         this.errorMessage = error;
       });
-    this.meta.addTags([
-      { name:'description',content:`${this.step.sub_title}`},
-      { name:'author',content:`${this.brand_company}`}
-    ])
   }
 
   onSelectCard(service){
@@ -51,7 +65,6 @@ export class ServiceOfferComponent implements OnInit {
     if (this.selectedCard) {
      this.dataStorageService.enableSelectedClass(this.selectedCard);
     }
-    console.log('this.state.is_first_step:', this.state.is_first_step);
     //ici on vérifie si le step is_first_step, and if so,
       if (this.state.is_first_step) {
         this.dataStorageService.disableNextBtn(false);
@@ -65,6 +78,11 @@ export class ServiceOfferComponent implements OnInit {
       service_id:this.selectedCard.id
     }
     this.dataStorageService.collectBookingInfo(bookDataToPass);
+  }
+
+  ngOnDestroy():void {
+    this.stateChangeSub.unsubscribe();
+    this.errorAdviseMessage.unsubscribe();
   }
 
 }

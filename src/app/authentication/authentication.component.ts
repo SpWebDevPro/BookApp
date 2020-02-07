@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthenticationService } from '../authentication.service';
+import { AuthenticationService } from './authentication.service';
 import { Subscription } from 'rxjs';
 import { DataStorageService } from '../data-storage.service';
 import { NbDialogService } from '@nebular/theme';
