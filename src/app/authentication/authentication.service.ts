@@ -133,7 +133,7 @@ export class AuthenticationService{
                     case "jwt_auth_invalid_token":
                         this.errorMessage = "Votre connexion précédente est trop ancienne. Vous devez vous reconnecter";
                         //here will need to logout and redirect to user
-                        // this.authenticationService.logOutUser();
+                        this.logOutUser();
                         break;
                     default:
                         this.errorMessage = "Une erreur s'est produite"; 
@@ -216,6 +216,7 @@ export class AuthenticationService{
         // console.log('je dispatch les infos erreurs');
         return this.advise_errorMessage.next(value);
     }
+
 
     //pass successInfo to authentication Component
     dispatchSuccessInfos(value:any){

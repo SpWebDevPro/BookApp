@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { Booking } from './_Models/booking.model';
 import { Restrictions } from './_Models/restrictions.model';
 import { Brand } from './_Models/brand.model';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 import { Customer } from './_Models/customer.model';
 import { HandlingErrorsComponent } from './handling-errors/handling-errors.component';
 import { NbDialogService } from '@nebular/theme';
@@ -58,6 +58,7 @@ export class DataStorageService {
     change_is_Loading_data = new Subject<Boolean>();
     change_btnMenu = new Subject<string>();
     advise_recieved_response_from_server = new Subject<any>();
+    
 
     errorMessage:string;
     advise_errorMessage_ds = new Subject<string>();
@@ -244,7 +245,7 @@ export class DataStorageService {
         let domain = this.myBrand.baseUrlApi;
         let apiWp = '/wp-json/apiBookApp';
         let fakeUrl = `${domain}${apiWp}/${step_name}`;
-        if (fakeUrl === `${domain}${apiWp}/start` || fakeUrl === `${domain}${apiWp}/firstStep` || fakeUrl === `${domain}${apiWp}/test`){
+        if (fakeUrl === `${domain}${apiWp}/start` || fakeUrl === `${domain}${apiWp}/firstStep` || fakeUrl === `${domain}${apiWp}/test` || fakeUrl === `${domain}${apiWp}/listBookings` || fakeUrl === `${domain}${apiWp}/cancelBooking`){
             return fakeUrl;
         }
         else {
@@ -381,6 +382,58 @@ export class DataStorageService {
                 error => this.handleErrors(error)
             )
     }
+
+    getUserAccountDetails(){
+        let url = this.getEndPointUrl('listBookings');
+        return this.http
+            .get(url)
+            .pipe(
+                tap((response) => {
+                    console.log(`response for ${url}:`, response);
+                }),
+            )
+            .subscribe( receivedData => {
+                let data = receivedData["data"];
+                console.log('data: ',data);
+                this.dispatchResponseReceived(data);
+                },
+                error => this.handleErrors(error)
+            )
+    }
+
+    cancelBooking(id){
+        let url = this.getEndPointUrl('cancelBooking');
+        let postData = {
+            id:id
+        };
+        let httpOptions = {
+            headers : new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        };
+        return this.http
+            .post(
+                url,
+                postData,
+                httpOptions)
+            .pipe(
+                tap((response) => {
+                    console.log(`response for ${url}:`, response);
+                })
+            )
+            .subscribe( receivedData => {
+                this.dispatchSuccessInfos(receivedData);
+                console.log('receivedData: ',receivedData);
+                
+                },
+                error => {
+                    this.handleErrors(error);
+                }
+            )
+    }
+
+
+
 
     //pass errorInfo to suscribers Component
     dispatchErrorInfos(value:any){

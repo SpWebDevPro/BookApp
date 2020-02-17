@@ -1,0 +1,33 @@
+<div class="newRDVbtn" fxLayout="row" fxLayoutAlign="end">
+    <button nbButton size="small" status="primary" [routerLink]="['/welcome']" routerLinkActive="router-link-active" >Prendre un nouveau RDV</button>
+</div>
+<div class="bookings" fxLayout="row" fxLayoutAlign="center">
+    <div class="booking-list" fxLayout="column">
+    <h6>Mes rendez-vous</h6>
+    <nb-accordion class="booking" *ngFor="let sortedBooking of sortedBookings | slice:0:10">
+        <nb-accordion-item #item>
+            <nb-accordion-item-header fxLayout="row">
+                <p>{{sortedBooking.date | date:'dd MMM yyyy'}} | {{sortedBooking.time | minToHours}}H  </p>
+                <p class="cancelled" *ngIf="sortedBooking.status === 'annulé'">&nbsp;&nbsp;&nbsp;{{sortedBooking.status}}</p>
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+                    <div fxLayout="column">
+                            <p fxLayout class="textleft">
+                                    <i fxFlexAlign="baseline" class="material-icons md-24 primary icon-menu" >assignment</i>
+                                    <span class="textleft">&nbsp;{{sortedBooking.booking_nice.service}}</span>
+                            </p>
+                            <p fxLayout class="textleft">
+                                    <i fxFlexAlign="baseline" class="material-icons md-24 primary icon-menu" >person_pin</i>
+                                    <span class="textleft">&nbsp;Avec&nbsp;{{sortedBooking.booking_nice.agent}}</span>
+                            </p>
+                            <p fxLayout class="textleft">
+                                            <i fxFlexAlign="baseline" class="material-icons md-24 primary icon-menu" >room</i>
+                                    <span class="textleft">&nbsp;{{sortedBooking.booking_nice.location_name}}, {{sortedBooking.booking_nice.location_address}}</span>
+                            </p>
+                    </div>
+                <button *ngIf="shouldDisplayCancellButton(sortedBooking.nice_date, sortedBooking.status)" nbButton size="tiny" status="danger" (click)="cancelBooking(sortedBooking.id)">Annuler le RDV</button>
+            </nb-accordion-item-body>
+        </nb-accordion-item>
+    </nb-accordion>
+</div>
+</div>

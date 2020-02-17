@@ -8,6 +8,11 @@
     </div >
     <div class="header-menu" fxLayout="row" fxLayoutAlign="end">
       <!-- <button nbButton size="tiny" id="btnAddApp">Installer l'appli</button> -->
+      <button nbButton ghost (click)="goToUserAccount()" *ngIf="isLoggedIn">
+        <i class="material-icons md-36 primary icon-menu"  >
+          account_box
+        </i>
+        </button>
       <button nbButton ghost (click)="onLogOut()" *ngIf="isLoggedIn">
         <i class="material-icons md-36 primary icon-menu"  >
           exit_to_app

@@ -201,6 +201,7 @@ export class AppComponent implements OnInit, OnDestroy {
       if (this.newVersionAvailable === true ){
         this.headerAndFooterDisabled = false;
         this.navButtonsDisabled = true;
+        this.authenticationService.logOutUser();
       }
     })
 
@@ -293,6 +294,12 @@ export class AppComponent implements OnInit, OnDestroy {
   onLogoClick(){
       this.router.navigate(['/welcome']);
       this.dataStorageService.displayHeaderAndFooter(true);
+      this.dataStorageService.changeBtnMenu('Continuer');
+  }
+
+  goToUserAccount(){
+    this.router.navigate(['/useraccount']);
+    this.dataStorageService.getUserAccountDetails();
   }
 
   updateVersion(){

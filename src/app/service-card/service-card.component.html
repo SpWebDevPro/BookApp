@@ -1,7 +1,13 @@
 
 <nb-card [accent]="selectedCard === service ? 'primary' : ''">
-    <nb-card-header ></nb-card-header>
+    <nb-card-header >
+        <div *ngIf="service.category_name_service === 'Happy Hours'" class="div-com" fxLayout="row" fxLayoutAlign="end">
+            <i fxFlexAlign="baseline" class="material-icons md-18 happy icon-menu" >star</i>
+            <p class="caption-2 happy-hours">{{service.category_name_service}}!</p>
+        </div>
+        </nb-card-header>
     <nb-card-body fxLayout="row" fxLayoutGap="15px">
+
         <nb-user 
             name="{{service.name}}" 
             title="{{service.short_description}}"

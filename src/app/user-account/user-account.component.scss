@@ -1,0 +1,39 @@
+@import '../../themes.scss';
+@import '../../styles.scss';
+
+
+.newRDVbtn {
+    margin-top:5%;
+    margin-right:5%;
+}
+
+.bookings {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    margin-bottom: 35px;
+}
+
+.booking-list {
+    width: 90%;
+    height: fit-content;
+    max-width: 600px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.booking {
+    margin-bottom: 10px;
+}
+
+.cancelled {
+    color: nb-theme(color-danger-600);
+    font-style: italic;
+}
+
+.textleft {
+    float:left;
+    text-align: left;
+    margin-top: 0;
+    // margin-bottom: 1%;
+}

@@ -14,6 +14,7 @@ import { HandlingErrorsComponent } from './handling-errors/handling-errors.compo
 import { AuthGuard } from './authentication/auth-guard.service';
 import { Error404Component } from './error404/error404.component';
 import { AlertComponent } from './alert/alert.component';
+import { UserAccountComponent } from './user-account/user-account.component';
 
 const routerOptions:ExtraOptions = {
   anchorScrolling:'enabled',
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path:'verify', component:VerifyComponent, canActivate:[AuthGuard], data: {state:'verify'}},
   { path:'confirmation', component:ConfirmationComponent, canActivate:[AuthGuard], data: {state:'confirmation'}},
   { path:'user', component:AuthenticationComponent, data: {state:'user'}},
+  { path:'useraccount', component:UserAccountComponent, data: {state:'useraccount'}},
   { path:'uimessage', component:HandlingErrorsComponent, data: {state:'uimessage'}},
   { path:'loding-spinner', component:LodingSpinnerComponent, data: {state:'loding-spinner'}},
   { path:'alert', component:AlertComponent, data: {state:'alert'}},

@@ -3,7 +3,8 @@ import { NbLayoutModule, NbCardModule, NbThemeModule, NbActionsModule,
             NbButtonModule, NbToggleModule, NbIconModule, NbUserModule, 
             NbCalendarModule, 
             NbSelectModule,
-            NbInputModule} from '@nebular/theme';
+            NbInputModule,
+            NbAccordionModule} from '@nebular/theme';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -19,6 +20,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         NbCalendarModule,
         NbSelectModule,
         NbInputModule,
+        NbAccordionModule,
         BrowserAnimationsModule,
         NbEvaIconsModule,
         NbIconModule,
@@ -35,6 +37,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         NbCalendarModule,
         NbSelectModule,
         NbInputModule,
+        NbAccordionModule,
         BrowserAnimationsModule,
         NbEvaIconsModule,
         NbIconModule,

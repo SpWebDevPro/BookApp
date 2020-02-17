@@ -80,6 +80,20 @@ nb-card.accent {
   font-weight: 700 !important;
 }
 
+[nbButton].appearance-ghost.status-primary {
+  color: var(--button-ghost-primary-text-color);
+  padding: var(--button-ghost-tiny-padding);
+}
+
+[nbButton].appearance-ghost.status-primary:focus {
+  color: var(--button-ghost-primary-text-color);
+  padding: var(--button-ghost-tiny-padding);
+  outline: none;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+
 .inactive {
   border-color: var(--button-filled-primary-disabled-border-color);
   color: var(--button-filled-primary-disabled-text-color);
@@ -101,12 +115,13 @@ nb-card.accent {
 .material-icons.icon-message{
   margin-right: 6px;
 }
-.material-icons.icon-menu{
-  margin-right: 10px;
-}
+// .material-icons.icon-menu{
+//   margin-right: 10px;
+// }
 
 .material-icons.primary { color:nb-theme(color-primary-500)};
 .material-icons.discret { color:nb-theme(color-basic-600)};
+.material-icons.happy { color:nb-theme(color-danger-600)}
 
 
 /*Rules for UI messages */

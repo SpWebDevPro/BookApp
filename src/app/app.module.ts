@@ -40,6 +40,7 @@ import { Error404Component } from './error404/error404.component';
 import { AlertComponent } from './alert/alert.component';
 import { dbService } from './indexeddb.service';
 import { NavigationService } from './navigation.service';
+import { UserAccountComponent } from './user-account/user-account.component';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { NavigationService } from './navigation.service';
     LodingSpinnerComponent,
     HandlingErrorsComponent,
     Error404Component,
-    AlertComponent
+    AlertComponent,
+    UserAccountComponent
   ],
   imports: [
     BrowserModule,
