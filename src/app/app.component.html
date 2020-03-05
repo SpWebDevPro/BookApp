@@ -3,7 +3,9 @@
   <nb-layout-header class="header" fixed *ngIf="!headerAndFooterDisabled && !headerDisabled" >
     <div>
       <div (click)="onLogoClick()" >
+        <button nbButton ghost>
         <img src="../assets/logo.png" alt="logo" height="42">
+      </button>
       </div>
     </div >
     <div class="header-menu" fxLayout="row" fxLayoutAlign="end">

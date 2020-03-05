@@ -12,6 +12,8 @@ import { environment } from 'src/environments/environment';
 export class AuthenticationService{
 
     baseUrl:string = environment.baseUrlApi;
+    apiWp = '/wp-json/apiBookApp';
+
 
     errorMessage:string;
     advise_errorMessage = new Subject<string>();
@@ -23,6 +25,7 @@ export class AuthenticationService{
     validUntil:any
 
     login_status = new Subject<Boolean>();
+    wantsToGoToUserAccount:Boolean = false; // will be set to true when user click on "mes RDV" in welcome page
     // user_email:string;
 
 
@@ -45,7 +48,7 @@ export class AuthenticationService{
             })
         };
         let postData = {
-            username:user.username,
+            username:user.email,
             email:user.email,
             password:user.password
         };
@@ -61,7 +64,7 @@ export class AuthenticationService{
             )
             .subscribe((data) => {
                 this.dataStorageService.dispatchIsLoadingStatus(false);
-                this.successMessage = "Votre compte a bien été crée";
+                this.successMessage = "Votre compte a bien été créé";
                 this.dispatchSuccessInfos(this.successMessage);
             },
             error => {
@@ -92,7 +95,7 @@ export class AuthenticationService{
             })
         };
         let postData = {
-            username:user.username,
+            username:user.email,
             password:user.password
         };
         // console.log('postData', postData)
@@ -109,11 +112,14 @@ export class AuthenticationService{
             .subscribe((data) => {
                 //if token:              
                 if(data['token']){
-                    //aller au firststep
-                    this.getFirstStep();
                     //récupérer le token, la duree de validité, le mail et le mettre en storage
                     this.setSession(data);
-                    // this.setUserEmail(data);
+                    if ( this.wantsToGoToUserAccount){
+                        this.goToUserAccount();
+                    }
+                    else {
+                        this.getFirstStep();
+                    }
                 }
                 this.isLoggedIn();
             },
@@ -145,10 +151,134 @@ export class AuthenticationService{
             })
     }
 
+    askForNewPassword(user){
+        let url = `${this.baseUrl}${this.apiWp}/customerAskResetPassword`;
+        let httpOptions = {
+            headers : new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        };
+        let postData = {
+            email:user.email,
+        };
+        console.log('postData:', postData);
+        this.http
+            .post(
+            url,
+            postData,
+            httpOptions)
+            .pipe(
+                tap((response) => {
+                    console.log(`response for ${url}:`, response)
+                })
+            )
+            .subscribe((data) => {
+                console.log('data:', data);
+                switch(data['message']) {
+                    case "Email inconnu, nous ne pouvons donner suite à votre demande":
+                        this.errorMessage = "Email inconnu, nous ne pouvons donner suite à votre demande"; 
+                        this.dispatchErrorInfos(this.errorMessage)
+                        break;
+                    case "Nous vous avons envoyé un email pour modifier votre mot de passe. La réception peut prendre quelques minutes":
+                        this.successMessage = "Nous vous avons envoyé un mail pour modifier votre mot de passe. La réception peut prendre quelques minutes"; 
+                        this.dispatchSuccessInfos(this.successMessage);
+                        break;
+                    case "400":
+                        this.errorMessage = "Une erreur s'est produite";
+                        this.dispatchErrorInfos(this.errorMessage)
+                        break;
+                    default:
+                        this.errorMessage = "Une erreur s'est produite"; 
+                        this.dispatchErrorInfos(this.errorMessage)
+                }
+            },
+            error => {
+                // this.dataStorageService.dispatchIsLoadingStatus(false);
+                console.log('error:', error);
+                console.log('error.error.message:', error.error.message);
+                //switch(error.error.message) {
+                    // case "Username already exists, please enter another username":
+                    //     this.errorMessage = "Un compte existe déjà avec cet identifiant"; 
+                    //     break;
+                    // case "Email already exists, please try 'Reset Password'":
+                    //     this.errorMessage = "Un compte existe déjà avec cet email"; 
+                    //     break;
+                    //default:
+                        //this.errorMessage = "Une erreur s'est produite"; 
+                //}
+                // this will pass the error to the components which have subscribed to it.
+                this.errorMessage = "Une erreur s'est produite"; 
+                this.dispatchErrorInfos(this.errorMessage);
+                // console.log('this.errorMessage:', this.errorMessage);
+            })
+    }
+    
+    confirmChangePassword(user){
+        let url = `${this.baseUrl}${this.apiWp}/customerChangePassword`;
+        let httpOptions = {
+            headers : new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        };
+        let postData = {
+            tokenPassword:user.tokenPassword,
+            password:user.password,
+            confirmedPassword:user.confirmedPassword
+        };
+        console.log('postData:', postData);
+        this.http
+            .post(
+            url,
+            postData,
+            httpOptions)
+            .pipe(
+                tap((response) => {
+                    console.log(`response for ${url}:`, response)
+                })
+            )
+            .subscribe((data) => {
+                console.log('data:', data);
+                switch(data['message']) {
+                    case "Votre mot de passe a été mis à jour.":
+                        this.successMessage = "Votre mot de passe a été mis à jour !"; 
+                        this.dispatchSuccessInfos(this.successMessage);
+                        break;
+                    case "Erreur ! les mots de passe ne correspondent pas":
+                        this.errorMessage = "Erreur ! les mots de passe ne correspondent pas"; 
+                        this.dispatchErrorInfos(this.errorMessage);
+                        break;
+                    case "Clé secrète invalide":
+                        this.errorMessage = "Clé secrète invalide";
+                        this.dispatchErrorInfos(this.errorMessage);
+                    default:
+                        this.errorMessage = "Une erreur s'est produite"; 
+                        this.dispatchErrorInfos(this.errorMessage);
+                }
+            },
+            error => {
+                // this.dataStorageService.dispatchIsLoadingStatus(false);
+                console.log('error:', error);
+                console.log('error.error.message:', error.error.message);
+                // switch(error.error.message) {
+                //     case "Username already exists, please enter another username":
+                //         this.errorMessage = "Un compte existe déjà avec cet identifiant"; 
+                //         break;
+                //     case "Email already exists, please try 'Reset Password'":
+                //         this.errorMessage = "Un compte existe déjà avec cet email"; 
+                //         break;
+                //     default:
+                //         this.errorMessage = "Une erreur s'est produite"; 
+                // }
+                //this will pass the error to the components which have subscribed to it.
+                this.errorMessage = "Une erreur s'est produite";
+                this.dispatchErrorInfos(this.errorMessage);
+                // console.log('this.errorMessage:', this.errorMessage);
+            })
+    }
+
     setSession(logInUserResult){
         localStorage.setItem('token', logInUserResult.token);
         localStorage.setItem('valid_until', JSON.stringify(logInUserResult.expiresIn));
-        // this.validUntil = JSON.stringify(logInUserResult.expiresIn);
         localStorage.setItem('email',logInUserResult.user_email);
     }
 
@@ -167,17 +297,11 @@ export class AuthenticationService{
         let exp = new Date(expirationDate*1000);
         let now = new Date();
         if (exp > now ){
-            // console.log('ok, the token is still valid');
-            return true
+            return true;
         } else {
-            // console.log('token invalid');
             return false;
         }
     }
-
-    // setUserEmail(userdata){
-    //     this.user_email =  this.getUserEmaillocalStorage();
-    // }
 
     logOutUser(){
         localStorage.removeItem('token');
@@ -205,7 +329,14 @@ export class AuthenticationService{
         this.dataStorageService.getFirstStepFromWP();
     }
 
-    goToAuthenticate(){
+    goToUserAccount(){
+        this.router.navigate(['/useraccount']);
+      }
+
+    goToAuthenticate(AfterAuthenticateGoTo){
+        if (AfterAuthenticateGoTo === 'useraccount'){
+            this.wantsToGoToUserAccount = true;
+        }
         this.router.navigate(['/user']);
         this.dataStorageService.displayNavButtonDiv(true);
         this.dataStorageService.displayHeaderAndFooter(false);

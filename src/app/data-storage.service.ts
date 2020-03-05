@@ -287,6 +287,7 @@ export class DataStorageService {
             direction:direction,
             customer:customer,
         };
+        console.log('postData :', postData);
         this.http
             .post(
                 url,
@@ -321,7 +322,8 @@ export class DataStorageService {
                 },
                 error => this.handleErrors(error)
                 )
-    }
+    
+            }
 
     getFirstStepFromWP(){
         let url = this.getEndPointUrl('firstStep');
@@ -346,7 +348,9 @@ export class DataStorageService {
                     this.booking = data["booking_object"];
                     this.customer = data["customer"];
                     this.step_name = data["step_name"];
-                    this.active_step_model = this.GetStepModelFromStepName(data["step_name"]);
+                    console.log('this.step_name :', this.step_name);
+                    this.active_step_model = this.GetStepModelFromStepName(this.step_name);
+                    console.log('this.active_step_model :', this.active_step_model);
                     this.displayStep(this.active_step_model.name);
                     this.disablePrevBtn(true);
                     this.disableNextBtn(true);
@@ -371,7 +375,22 @@ export class DataStorageService {
                 // let data = dataa.data;
                 let data = receivedData["data"];
                 // this.dispatchResponseReceived(data);
-                this.steps_models = data["steps_models"];
+
+                // quick fix to remove location in case it is created in backend, to avoid any bug
+                //we will check if locations is in steps_models, and if, so will remove it
+                // this.steps_models = data["steps_models"];
+                let array = data["steps_models"];
+                for ( let i=0; i< array.length; i++){
+                    if (array[i]["name"] === 'locations') {
+                        array.splice(i,1);
+                    }
+                    // console.log('array:', array);
+                    // return array;
+                }
+                this.steps_models = array;
+                console.log('this steps_models', this.steps_models);
+                this.active_step_model = this.steps_models[0];
+                console.log('this.active_step_model :', this.active_step_model);
                 // this.dbService.addStepsToDataBase(this.steps_models);
                 this.booking = data["booking"];
                 // this.dbService.addBookingToDataBase(this.booking);

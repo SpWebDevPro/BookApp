@@ -66,7 +66,7 @@ export class ServiceOfferComponent implements OnInit {
      this.dataStorageService.enableSelectedClass(this.selectedCard);
     }
     //ici on vérifie si le step is_first_step, and if so,
-      if (this.state.is_first_step) {
+      if (this.state.is_first_step || this.step.name === 'services') {
         this.dataStorageService.disableNextBtn(false);
         this.dataStorageService.disablePrevBtn(true);
       }

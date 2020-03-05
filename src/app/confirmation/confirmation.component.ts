@@ -60,7 +60,7 @@ export class ConfirmationComponent implements OnInit {
       });
 
     if (this.booking_id){
-      this.message_confirmation = this.brand_bye;
+      this.message_confirmation = this.step.description;
     }
     else {
       this.message_confirmation = "une erreur est survenue, veuillez re-essayer ultérieurement";

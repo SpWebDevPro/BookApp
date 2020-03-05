@@ -5,6 +5,7 @@ import { AuthenticationService } from '../authentication/authentication.service'
 import { PwaService } from '../pwa.service';
 import { Subscription } from 'rxjs';
 import { Meta } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -31,6 +32,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   constructor(
     private dataStorageService:DataStorageService,
     private authenticationService:AuthenticationService,
+    private router:Router,
     private pwaService:PwaService,
     private meta:Meta
    ){}
@@ -73,9 +75,23 @@ export class WelcomeComponent implements OnInit, OnDestroy {
       //est ce que j'ai bien mes infos mails?
     }
     else {
-      this.authenticationService.goToAuthenticate();
+      this.authenticationService.goToAuthenticate('firststep');
     }
   }
+
+
+  goToUserAccount(){
+    if (this.isLoggedIn){ 
+      console.log('ok je suis loggedIN');
+      this.router.navigate(['/useraccount']);
+    }
+    else {
+      this.authenticationService.goToAuthenticate('useraccount');
+    }
+  }
+
+
+
 
   promptInstall(){
     // console.log('je clic sur installer l appli');

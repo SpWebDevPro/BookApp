@@ -5,5 +5,6 @@
     <div fxLayout="column" fxLayoutGap="20px">
         <button *ngIf="deferredPrompt" [className]="displayAppBtn === false ? 'add-app-btn' : 'welcome-button'"  nbButton status="info" (click)="promptInstall()" id="btnAddApp">Installer l'appli</button>
         <button class="welcome-button" nbButton status="info" (click)="startProcess()">Prendre Rendez-vous</button>
+        <button class="welcome-button" nbButton status="info" (click)="goToUserAccount()">Mes rendez-vous</button>
     </div>
 </div>

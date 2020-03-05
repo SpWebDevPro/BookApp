@@ -5,7 +5,7 @@ import { HelperCalendarService } from './helper-calendar.service';
     name:'minToHours'
 })
 export class MinToHoursPipe implements PipeTransform {
-
+ng
     constructor(
         private helperCalendarService:HelperCalendarService
     ){}

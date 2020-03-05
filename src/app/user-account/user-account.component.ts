@@ -29,6 +29,8 @@ export class UserAccountComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.dataStorageService.getUserAccountDetails();
+    this.dataStorageService.displayHeaderAndFooter(false);
     this.dataStorageService.displayNavButtonDiv(true);
     this.today= this.getToday();
     console.log(this.today);
@@ -84,7 +86,7 @@ export class UserAccountComponent implements OnInit, OnDestroy {
   }
 
   getDateHourBooking(booking){
-    console.log(booking);
+    // console.log(booking);
     let hour:string;
     hour = this.helperCalendarService.convertMinToHours(booking.start_time);
     let niceDate:string;
@@ -98,6 +100,11 @@ export class UserAccountComponent implements OnInit, OnDestroy {
     return shortbookings.sort(function(a,b){
       return (b.date) - (a.date);
     })
+  }
+
+  GoToFirstStep(){
+    console.log('i want to go to first step');
+    this.dataStorageService.getFirstStepFromWP();
   }
 
   getToday(){

@@ -13,9 +13,13 @@ import { HandlingErrorsComponent } from '../handling-errors/handling-errors.comp
 })
 export class AuthenticationComponent implements OnInit, OnDestroy {
 
-  pageDisplayIsLogin:Boolean;
+  formDisplay:string = ''; //login or register or askForNewPassword or changePassword
+  displayLogin:Boolean;
+  displayRegister:Boolean;
+  displayAskForNewPassword:Boolean;
+  displayChangePassword:Boolean;
   pageTitle:string = "";
-  pageMenu:string = "";
+  pageMenus:any; // array with 'Me connecter', 'Créer un compte', 'Mot de passe oublié ?'
 
   isLoadingStatus:Subscription;
   isLoading:Boolean = false;
@@ -26,21 +30,47 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
   errorMessage:string = null;
 
   successAdviseMessage:Subscription;
-  // successMessage:string = null;
+  successMessage:string = null;
 
   base_url:string;
   url_retreive_password:string;
 
   registerForm = new FormGroup({
-    'username': new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(58)]),
+    // 'username': new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(58)]),
+    'email': new FormControl(null, [Validators.required, Validators.email, Validators.maxLength(98)]),
+    // 'password': new FormControl(null, [Validators.required, Validators.maxLength(253)] )
+    'password': new FormControl(null, Validators.compose([
+      Validators.required,
+      Validators.maxLength(253),
+      Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$')
+    ]))
+  });
+
+  loginForm = new FormGroup({
+    // 'username': new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(58)]),
     'email': new FormControl(null, [Validators.required, Validators.email, Validators.maxLength(98)]),
     'password': new FormControl(null, [Validators.required, Validators.maxLength(253)] )
   });
 
-  loginForm = new FormGroup({
-    'username': new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(58)]),
-    'password': new FormControl(null, [Validators.required, Validators.maxLength(253)] )
-  });
+  askForNewPasswordForm = new FormGroup({
+    'email': new FormControl(null, [Validators.required, Validators.email, Validators.maxLength(98)])
+  })
+
+  changePasswordForm = new FormGroup({
+    'tokenPassword': new FormControl(null, [Validators.required, Validators.maxLength(253)] ),
+    // 'password': new FormControl(null, [Validators.required, Validators.maxLength(253)] ),
+    'password': new FormControl(null, Validators.compose([
+      Validators.required,
+      Validators.maxLength(253),
+      Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$')
+    ])),
+    'confirmedPassword': new FormControl(null, Validators.compose([
+      Validators.required,
+      Validators.maxLength(253),
+      Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$')
+    ]))
+  //rajouter le validator entre password et confirmedPassword
+  })
 
   constructor(
     private authenticationService:AuthenticationService,
@@ -49,9 +79,14 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.pageDisplayIsLogin = true;
-    this.pageTitle = "Me connecter";
-    this.pageMenu = "Créer un compte";
+    
+    this.changeDisplay('login');
+
+    //only for testing purpose
+    // this.changeDisplay('register');
+    // this.changeDisplay('askForNewPassword');
+    // this.changeDisplay('changePassword');
+
     this.errorAdviseMessage = this.authenticationService.advise_errorMessage.subscribe(
       (error) => {
         this.openDialog(error, null);
@@ -59,15 +94,21 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
       });
     this.successAdviseMessage = this.authenticationService.advise_successMessage.subscribe(
       (success) => {
-        this.openDialog(null, success);
-        if(!this.pageDisplayIsLogin){
-          this.changeDisplay();
+        this.successMessage = success;
+        if(this.successMessage === 'Nous vous avons envoyé un mail pour modifier votre mot de passe. La réception peut prendre quelques minutes'){
+          console.log('OK!!!!!');
+          this.changeDisplay('changePassword');
         }
+        if(this.displayLogin){
+              this.changeDisplay('login');
+        }
+        if(this.successMessage === 'Votre mot de passe a été mis à jour !'){
+          this.changeDisplay('login');
+        }
+        this.openDialog(null, success);
       });
     this.isLoadingStatus = this.dataStorageService.change_is_Loading_data.subscribe(
       status => this.isLoading = status);
-    this.base_url = this.dataStorageService.myBrand.baseUrlApi;
-    this.url_retreive_password = `${this.base_url}/wp-login.php?action=lostpassword`;
   }
 
   ngOnDestroy(){
@@ -76,31 +117,100 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
     this.isLoadingStatus.unsubscribe();
   }
 
-  changeDisplay(){
-    if(this.pageDisplayIsLogin) {
-      this.pageDisplayIsLogin = ! this.pageDisplayIsLogin;
-      this.pageTitle = "Créer un compte";
-      this.pageMenu = "Me connecter";
+
+  handleMenuChoice(menuChoice){
+    if(menuChoice === 'Me connecter'){
+      this.changeDisplay('login');
     }
-    else {
-      this.pageDisplayIsLogin = ! this.pageDisplayIsLogin;
+    if(menuChoice === 'Créer un compte'){
+      this.changeDisplay('register');
+    }
+    if(menuChoice === 'Mot de passe oublié ?'){
+      console.log('inside menuChoice === Mot de passe oublié ?')
+      this.changeDisplay('askForNewPassword');
+    }
+
+  }
+
+
+
+  changeDisplay(formToDisplay){
+    if (formToDisplay === 'login'){
+      this.formDisplay = 'login';
       this.pageTitle = "Me connecter";
-      this.pageMenu = "Créer un compte";
+      this.pageMenus = ["Créer un compte", "Mot de passe oublié ?" ]; 
+      this.displayLogin = true;
+      this.displayRegister = false;
+      this.displayAskForNewPassword = false;
+      this.displayChangePassword = false;
+    }
+    if (formToDisplay === 'register'){
+      this.formDisplay = 'register';
+      this.pageTitle = "Créer un compte";
+      this.pageMenus = ["Me connecter" ];
+      this.displayLogin = false;
+      this.displayRegister = true;
+      this.displayAskForNewPassword = false;
+      this.displayChangePassword = false;
+    }
+    if (formToDisplay === 'askForNewPassword'){
+      this.formDisplay = 'askForNewPassword';
+      this.pageTitle = "Demander un nouveau mot de passe";
+      this.pageMenus = ["Me connecter", "Créer un compte" ];
+      this.displayLogin = false;
+      this.displayRegister = false;
+      this.displayAskForNewPassword = true;
+      this.displayChangePassword = false;
+    }
+    if (formToDisplay === 'changePassword'){
+      this.formDisplay = 'changePassword';
+      this.pageTitle = "Définir mon nouveau mot de passe";
+      this.pageMenus = ["Me connecter", "Créer un compte" ];
+      this.displayLogin = false;
+      this.displayRegister = false;
+      this.displayAskForNewPassword = false;
+      this.displayChangePassword = true;
     }
   }
 
+
+
   onSubmit(){
-    if (this.pageDisplayIsLogin) {
+    if(this.formDisplay === 'login'){
+      // console.log('je vais gérer login');
       this.authenticationService.logInUser(this.loginForm.value);
       this.loginForm.reset();
       this.dataStorageService.dispatchIsLoadingStatus(true);
-    } else {
+    }
+    if(this.formDisplay === 'register'){
+      // console.log('je vais gérer register');
       this.authenticationService.registerUser(this.registerForm.value);
       this.registerForm.reset();
       this.dataStorageService.dispatchIsLoadingStatus(true);
-      if (!this.errorMessage) {this.changeDisplay()};
+      if (!this.errorMessage) {this.changeDisplay('login')};
     }
+    if(this.formDisplay === 'askForNewPassword'){
+      // console.log('je vais gérer la demande de reset password');
+      this.authenticationService.askForNewPassword(this.askForNewPasswordForm.value);
+      if (this.successMessage) {
+        this.askForNewPasswordForm.reset();
+        // this.changeDisplay('changePassword');
+      }
+    }
+    if(this.formDisplay === 'changePassword'){
+      // console.log('je vais gérer le changement password');
+      this.authenticationService.confirmChangePassword(this.changePasswordForm.value);
+      //ici on appellera une fonction qui enverra une requete au back
+      //pour enregistrer le nouveau mot de passe.
+      //si pas d'erreur message, on renverra sur login;
+      if (!this.errorMessage) {
+        this.changePasswordForm.reset();
+        // this.changeDisplay('login');
+      }
+    }
+
   }
+
 
   openDialog(errMess,successMess){
     let dialogref;

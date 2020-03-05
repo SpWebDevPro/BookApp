@@ -228,7 +228,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.active_step_model = this.dataStorageService.getState().active_step_model;
         console.log('this.active_step_model.name:', this.active_step_model);
         if (this.active_step_model.name === 'verify'){
-            console.log('i am blured');
+            // console.log('i am blured');
             document.getElementById('next').blur();
         }
         this.btnNextIsDisabled = value;
@@ -247,11 +247,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this.IsLoggedInSub = this.authenticationService.login_status
     .subscribe((value:Boolean) => {
       this.isLoggedIn = value;
-      console.log('From app cpt, this.isLoggedIn :', this.isLoggedIn);
+      // console.log('From app cpt, this.isLoggedIn :', this.isLoggedIn);
     });
     // this.authenticationService.isLoggedIn();
-    
 
+    
     //go to splash screen welcome
     this.toWelcome(this.router);
   }
@@ -299,7 +299,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   goToUserAccount(){
     this.router.navigate(['/useraccount']);
-    this.dataStorageService.getUserAccountDetails();
   }
 
   updateVersion(){

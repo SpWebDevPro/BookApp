@@ -1,5 +1,6 @@
 <div class="newRDVbtn" fxLayout="row" fxLayoutAlign="end">
-    <button nbButton size="small" status="primary" [routerLink]="['/welcome']" routerLinkActive="router-link-active" >Prendre un nouveau RDV</button>
+    <!-- <button nbButton size="small" status="primary" [routerLink]="['/welcome']" routerLinkActive="router-link-active" >Prendre un nouveau RDV</button> -->
+    <button nbButton size="small" status="primary"  (click)="GoToFirstStep()" >Prendre un nouveau RDV</button>
 </div>
 <div class="bookings" fxLayout="row" fxLayoutAlign="center">
     <div class="booking-list" fxLayout="column">
