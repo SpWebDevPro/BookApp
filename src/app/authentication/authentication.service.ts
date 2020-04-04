@@ -88,6 +88,8 @@ export class AuthenticationService{
     }
 
     logInUser(user){
+        //il faudrait vérifier la validité du token avant de se connecter.et logout s'il est périmé.
+        // ça doit être fait à l'ouvertue de l'app.
         let url = `${this.baseUrl}/wp-json/jwt-auth/v1/token`
         let httpOptions = {
             headers : new HttpHeaders({
@@ -315,7 +317,7 @@ export class AuthenticationService{
 
     isLoggedIn():boolean{
         if (localStorage.getItem('token') && (this.isJWTValid())){
-            // console.log('the user is loggedIn');
+            console.log('the user is loggedIn');
             this.login_status.next(true);
             return true;
         }
