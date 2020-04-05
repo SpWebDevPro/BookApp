@@ -47,7 +47,7 @@ export class ConfirmationComponent implements OnInit {
     });
 
     this.brand_company = this.dataStorageService.myBrand.company;
-    this.brand_bye = this.dataStorageService.myBrand.bye;
+    // this.brand_bye = this.dataStorageService.myBrand.bye;
     this.meta.addTags([
       { name:'description',content:`${this.step.sub_title}`},
       { name:'author',content:`${this.brand_company}`}

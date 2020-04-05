@@ -18,7 +18,7 @@ import { dbService } from './indexeddb.service';
 @Injectable()
 export class DataStorageService {
 
-    myBrand = new Brand(environment.name,environment.welcome,'','',environment.baseUrlApi, environment.company, environment.bye)
+    myBrand = new Brand(environment.name,environment.welcome,'','',environment.baseUrlApi, environment.company, environment.appUrl)
 
     state:any;
     change_state = new Subject<Boolean>();

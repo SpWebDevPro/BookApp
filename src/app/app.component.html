@@ -4,7 +4,7 @@
     <div>
       <div (click)="onLogoClick()" >
         <button nbButton ghost>
-        <img src="../assets/logo.png" alt="logo" height="42">
+        <img src="../assets/logos/logo.png" alt="logo" height="42">
       </button>
       </div>
     </div >
@@ -51,7 +51,7 @@
   <div fxLayout="column" fxLayoutAlign="center">
 
     <!-- Install banner sticky bottom menu -->
-      <div class="Install-banner" *ngIf="installBannerForIos || installBannerForSamsungInternet" fxLayout="column" fxLayoutAlign="center">
+      <div id="banner-install-app" class="Install-banner" *ngIf="installBannerForIos || installBannerForSamsungInternet" fxLayout="column" fxLayoutAlign="center">
           <div class="divclosingbtn">
               <button class="btn-close" nbButton ghost (click)="closeInstallBanner()"><i class="material-icons md-18 discret icon-close" >clear</i></button>
           </div>

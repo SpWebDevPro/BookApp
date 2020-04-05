@@ -24,7 +24,19 @@ h1{
 button.welcome-button {
     display:block;
     margin: auto; 
-   
+}
+
+.test-div {
+    position: absolute;
+    bottom:0;
+    padding:15px;
+}
+
+
+.share-button {
+    margin:auto;
+    min-width: auto !important;
+    padding:10px !important;
 }
 
 .add-app-btn {

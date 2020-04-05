@@ -20,14 +20,20 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   
   brand_Name_Application:string;
   brand_welcome_message:string;
-  brand_company:string
+  brand_company:string;
+  brand_url:string;
   step_name:string;
   active_step_model:Step;
 
   displayAppBtn:Boolean = true;
-  
+  displayShareBtn:Boolean;
+  // for testing
+  // displayShareBtn:Boolean = true;
+
   deferredPrompt:any;
   catched_prompt_installation_sub:Subscription;
+
+  navigator_var:any;
 
   constructor(
     private dataStorageService:DataStorageService,
@@ -49,12 +55,19 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     .subscribe((value:Boolean) => {
       this.isLoggedIn = value;
       console.log('From welcome cpt, this.isLoggedIn :', this.isLoggedIn);
+      // if(!this.isLoggedIn){
+      //   this.authenticationService.logOutUser();
+      // }
     });
     this.authenticationService.isLoggedIn();
+    if(!this.isLoggedIn){
+      this.authenticationService.logOutUser();
+    }
 
     this.brand_Name_Application = this.dataStorageService.myBrand.name;
     this.brand_welcome_message = this.dataStorageService.myBrand.welcome;
     this.brand_company = this.dataStorageService.myBrand.company;
+    this.brand_url = this.dataStorageService.myBrand.appUrl;
     this.meta.addTags([
       {
         name:'description',
@@ -65,6 +78,22 @@ export class WelcomeComponent implements OnInit, OnDestroy {
         content:`${this.brand_company}`
       },
     ])
+
+    this.navigator_var = window.navigator;
+    if ( this.navigator_var && this.navigator_var.share){
+      console.log('fonctionnalité de partage supportée');
+      this.displayShareBtn = true;
+      // this.navigator_var.share({
+      //   title: this.brand_Name_Application,
+      //   text: this.brand_welcome_message,
+      //   url:this.brand_url,
+      // })
+      // .then(()=> console.log('Merci d\'avoir partagé'))
+      // .catch((error) => console.log('erreur de partage :', error))
+    }
+    else {
+      console.log('fonctionnalité de partage non supportée');
+    }
   
   }
 
@@ -91,12 +120,23 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   }
 
 
-
-
   promptInstall(){
     // console.log('je clic sur installer l appli');
     this.displayAppBtn = false;
     this.pwaService.promptInstallation(this.deferredPrompt);
+  }
+
+  shareApp(){
+    console.log('je vais share l app');
+    if ( this.navigator_var && this.navigator_var.share){
+    this.navigator_var.share({
+      title: this.brand_Name_Application,
+      text: this.brand_welcome_message,
+      url:this.brand_url,
+    })
+    .then(()=> console.log('Merci d\'avoir partagé'))
+    .catch((error) => console.log('erreur de partage :', error))
+    }
   }
 
   ngOnDestroy(){

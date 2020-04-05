@@ -7,4 +7,7 @@
         <button class="welcome-button" nbButton status="info" (click)="startProcess()">Prendre Rendez-vous</button>
         <button class="welcome-button" nbButton status="info" (click)="goToUserAccount()">Mes rendez-vous</button>
     </div>
+    <div *ngIf="displayShareBtn" class="test-div" fxLayoutAlign="end" fxFlexAlign="end">
+        <button nbButton id="share-button-welcome" class="share-button" shape="round" status="info" (click)="shareApp()"><span class="material-icons">share</span></button>
+    </div>
 </div>

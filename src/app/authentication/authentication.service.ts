@@ -143,6 +143,9 @@ export class AuthenticationService{
                         //here will need to logout and redirect to user
                         this.logOutUser();
                         break;
+                    case "[jwt_auth] invalid_email":
+                        this.errorMessage = "Email non valide"; 
+                        break;
                     default:
                         this.errorMessage = "Une erreur s'est produite"; 
                 }
@@ -309,7 +312,8 @@ export class AuthenticationService{
         localStorage.removeItem('token');
         localStorage.removeItem('valid_until');
         localStorage.removeItem('email');
-        this.isLoggedIn();
+        // this.isLoggedIn();
+        this.login_status.next(false);
         //go to welcome page i/o authenticate
         this.router.navigate(['/welcome']);
         this.dataStorageService.displayNavButtonDiv(true);
