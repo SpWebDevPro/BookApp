@@ -59,7 +59,7 @@ export class AuthenticationService{
             httpOptions)
             .pipe(
                 tap((response) => {
-                    console.log(`response for ${url}:`, response)
+                    // console.log(`response for ${url}:`, response)
                 })
             )
             .subscribe((data) => {
@@ -69,8 +69,8 @@ export class AuthenticationService{
             },
             error => {
                 this.dataStorageService.dispatchIsLoadingStatus(false);
-                console.log('error:', error);
-                console.log('error.error.message:', error.error.message);
+                // console.log('error:', error);
+                // console.log('error.error.message:', error.error.message);
                 switch(error.error.message) {
                     case "Username already exists, please enter another username":
                         this.errorMessage = "Un compte existe déjà avec cet identifiant"; 
@@ -83,7 +83,7 @@ export class AuthenticationService{
                 }
                 //this will pass the error to the components which have subscribed to it.
                 this.dispatchErrorInfos(this.errorMessage);
-                console.log('this.errorMessage:', this.errorMessage);
+                // console.log('this.errorMessage:', this.errorMessage);
             })
     }
 
@@ -108,7 +108,7 @@ export class AuthenticationService{
             httpOptions)
             .pipe(
                 tap((response) => {
-                    console.log(`response for ${url}:`, response)
+                    // console.log(`response for ${url}:`, response)
                 })
             )
             .subscribe((data) => {
@@ -126,8 +126,8 @@ export class AuthenticationService{
                 this.isLoggedIn();
             },
             error => {
-                console.log('error:', error);
-                console.log('error.error.code:', error.error.code);
+                // console.log('error:', error);
+                // console.log('error.error.code:', error.error.code);
                 switch(error.error.code) {
                     case "[jwt_auth] invalid_username":
                         this.errorMessage = "Identifiant erronné"; 
@@ -151,7 +151,7 @@ export class AuthenticationService{
                 }
                 //this will pass the error to the components which have subscribe to it.
                 this.dispatchErrorInfos(this.errorMessage);
-                console.log('this.errorMessage:', this.errorMessage);
+                // console.log('this.errorMessage:', this.errorMessage);
                 this.dataStorageService.dispatchIsLoadingStatus(false);
             })
     }
@@ -166,7 +166,7 @@ export class AuthenticationService{
         let postData = {
             email:user.email,
         };
-        console.log('postData:', postData);
+        // console.log('postData:', postData);
         this.http
             .post(
             url,
@@ -174,11 +174,11 @@ export class AuthenticationService{
             httpOptions)
             .pipe(
                 tap((response) => {
-                    console.log(`response for ${url}:`, response)
+                    // console.log(`response for ${url}:`, response)
                 })
             )
             .subscribe((data) => {
-                console.log('data:', data);
+                // console.log('data:', data);
                 switch(data['message']) {
                     case "Email inconnu, nous ne pouvons donner suite à votre demande":
                         this.errorMessage = "Email inconnu, nous ne pouvons donner suite à votre demande"; 
@@ -199,8 +199,8 @@ export class AuthenticationService{
             },
             error => {
                 // this.dataStorageService.dispatchIsLoadingStatus(false);
-                console.log('error:', error);
-                console.log('error.error.message:', error.error.message);
+                // console.log('error:', error);
+                // console.log('error.error.message:', error.error.message);
                 //switch(error.error.message) {
                     // case "Username already exists, please enter another username":
                     //     this.errorMessage = "Un compte existe déjà avec cet identifiant"; 
@@ -230,7 +230,7 @@ export class AuthenticationService{
             password:user.password,
             confirmedPassword:user.confirmedPassword
         };
-        console.log('postData:', postData);
+        // console.log('postData:', postData);
         this.http
             .post(
             url,
@@ -238,11 +238,11 @@ export class AuthenticationService{
             httpOptions)
             .pipe(
                 tap((response) => {
-                    console.log(`response for ${url}:`, response)
+                    // console.log(`response for ${url}:`, response)
                 })
             )
             .subscribe((data) => {
-                console.log('data:', data);
+                // console.log('data:', data);
                 switch(data['message']) {
                     case "Votre mot de passe a été mis à jour.":
                         this.successMessage = "Votre mot de passe a été mis à jour !"; 
@@ -262,8 +262,8 @@ export class AuthenticationService{
             },
             error => {
                 // this.dataStorageService.dispatchIsLoadingStatus(false);
-                console.log('error:', error);
-                console.log('error.error.message:', error.error.message);
+                // console.log('error:', error);
+                // console.log('error.error.message:', error.error.message);
                 // switch(error.error.message) {
                 //     case "Username already exists, please enter another username":
                 //         this.errorMessage = "Un compte existe déjà avec cet identifiant"; 
@@ -321,7 +321,7 @@ export class AuthenticationService{
 
     isLoggedIn():boolean{
         if (localStorage.getItem('token') && (this.isJWTValid())){
-            console.log('the user is loggedIn');
+            // console.log('the user is loggedIn');
             this.login_status.next(true);
             return true;
         }

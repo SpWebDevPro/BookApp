@@ -2,5 +2,10 @@
 <div  class="bye" fxLayout="column" fxLayoutAlign="center">
     <i fxFlexAlign="center" class="bye-content material-icons icon-message md-48" >done</i>
     <h6 fxFlexAlign="center" class="bye-content">{{message_confirmation}}</h6>
+    <p fxFlexAlign="center" class="dontforget">Avez-vous pensé à installer l'application sur votre écran d'accueil pour la prochaine fois?</p>
+    <p fxFlexAlign="center" class="dontforget">Partagez notre application sans modération pour nous soutenir, merci!</p>
+    <div fxFlexAlign="center" *ngIf="displayShareBtn" class="test-div">
+        <button nbButton id="share-button-bye" class="share-button" shape="round" status="info" (click)="shareApp()"><span class="material-icons">share</span></button>
+    </div>
 </div>
     

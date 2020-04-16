@@ -33,7 +33,7 @@ export class UserAccountComponent implements OnInit, OnDestroy {
     this.dataStorageService.displayHeaderAndFooter(false);
     this.dataStorageService.displayNavButtonDiv(true);
     this.today= this.getToday();
-    console.log(this.today);
+    // console.log(this.today);
     this.errorAdviseMessage = this.dataStorageService.advise_errorMessage_ds.subscribe(
       (error) => {
         this.dataStorageService.openDialog(error, null);
@@ -41,7 +41,7 @@ export class UserAccountComponent implements OnInit, OnDestroy {
       });
     this.successAdviseMessage = this.dataStorageService.advise_successMessage_ds.subscribe(
       (success) => {
-        console.log('success:', success['message']);
+        // console.log('success:', success['message']);
         this.dataStorageService.openDialog(null, success['message']);
         // this.successMessage = success.message;
       });
@@ -59,7 +59,7 @@ export class UserAccountComponent implements OnInit, OnDestroy {
   }
 
   cancelBooking(id){
-    console.log('je veux annuler le booking id: ', id);
+    // console.log('je veux annuler le booking id: ', id);
     this.dataStorageService.cancelBooking(id);
     this.dataStorageService.getUserAccountDetails();
   }
@@ -103,7 +103,7 @@ export class UserAccountComponent implements OnInit, OnDestroy {
   }
 
   GoToFirstStep(){
-    console.log('i want to go to first step');
+    // console.log('i want to go to first step');
     this.dataStorageService.getFirstStepFromWP();
   }
 

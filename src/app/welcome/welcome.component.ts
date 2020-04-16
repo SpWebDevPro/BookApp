@@ -54,7 +54,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     this.IsLoggedInSub = this.authenticationService.login_status
     .subscribe((value:Boolean) => {
       this.isLoggedIn = value;
-      console.log('From welcome cpt, this.isLoggedIn :', this.isLoggedIn);
+      // console.log('From welcome cpt, this.isLoggedIn :', this.isLoggedIn);
       // if(!this.isLoggedIn){
       //   this.authenticationService.logOutUser();
       // }
@@ -62,6 +62,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     this.authenticationService.isLoggedIn();
     if(!this.isLoggedIn){
       this.authenticationService.logOutUser();
+      // this.startProcess();
     }
 
     this.brand_Name_Application = this.dataStorageService.myBrand.name;
@@ -81,7 +82,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
 
     this.navigator_var = window.navigator;
     if ( this.navigator_var && this.navigator_var.share){
-      console.log('fonctionnalité de partage supportée');
+      // console.log('fonctionnalité de partage supportée');
       this.displayShareBtn = true;
       // this.navigator_var.share({
       //   title: this.brand_Name_Application,
@@ -92,14 +93,14 @@ export class WelcomeComponent implements OnInit, OnDestroy {
       // .catch((error) => console.log('erreur de partage :', error))
     }
     else {
-      console.log('fonctionnalité de partage non supportée');
+      // console.log('fonctionnalité de partage non supportée');
     }
   
   }
 
   startProcess(){
     if (this.isLoggedIn){ 
-      console.log('ok je suis loggedIN');
+      // console.log('ok je suis loggedIN');
       this.authenticationService.getFirstStep();
       //est ce que j'ai bien mes infos mails?
     }
@@ -111,7 +112,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
 
   goToUserAccount(){
     if (this.isLoggedIn){ 
-      console.log('ok je suis loggedIN');
+      // console.log('ok je suis loggedIN');
       this.router.navigate(['/useraccount']);
     }
     else {
@@ -127,7 +128,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   }
 
   shareApp(){
-    console.log('je vais share l app');
+    // console.log('je vais share l app');
     if ( this.navigator_var && this.navigator_var.share){
     this.navigator_var.share({
       title: this.brand_Name_Application,

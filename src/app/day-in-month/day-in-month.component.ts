@@ -55,7 +55,7 @@ export class DayInMonthComponent implements OnInit, OnDestroy {
 
   selectHour(day, AvailableHour, i){
     this.selectedId = null;
-    console.log('index:', i);
+    // console.log('index:', i);
     this.selectedId = i;
     this.displayBookingSelection = false;
     this.dataAvailableHour = AvailableHour;

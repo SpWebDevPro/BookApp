@@ -96,7 +96,6 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
       (success) => {
         this.successMessage = success;
         if(this.successMessage === 'Nous vous avons envoyé un mail pour modifier votre mot de passe. La réception peut prendre quelques minutes'){
-          console.log('OK!!!!!');
           this.changeDisplay('changePassword');
         }
         if(this.displayLogin){
@@ -126,7 +125,7 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
       this.changeDisplay('register');
     }
     if(menuChoice === 'Mot de passe oublié ?'){
-      console.log('inside menuChoice === Mot de passe oublié ?')
+      // console.log('inside menuChoice === Mot de passe oublié ?')
       this.changeDisplay('askForNewPassword');
     }
 

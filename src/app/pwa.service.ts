@@ -26,12 +26,12 @@ export class PwaService {
         deferredPrompt.prompt();
         deferredPrompt.userChoice
           .then((choiceResult) => {
-            console.log('choiceResult:', choiceResult);
+            // console.log('choiceResult:', choiceResult);
             if ( choiceResult.outcome === 'accepted'){
               //TODO: place a message that the app is being installed in the screen
-              console.log("l'utilisateur a accepté l'installation sur le home screen")
+              // console.log("l'utilisateur a accepté l'installation sur le home screen")
             } else {
-              console.log("l'utilisateur ne veut pas procéder à l'installation pour l'instant")
+              // console.log("l'utilisateur ne veut pas procéder à l'installation pour l'instant")
             }
             deferredPrompt = null;
           })
@@ -69,7 +69,7 @@ export class PwaService {
     }
     
     displayBrowserAndDeviseInfos(){
-      console.group("Browser and Device infos");
+      // console.group("Browser and Device infos");
     }
     
 }
