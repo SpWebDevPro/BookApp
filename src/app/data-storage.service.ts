@@ -144,7 +144,7 @@ export class DataStorageService {
             return this.active_step_model;
         }
         else {
-            console.log('cannot get active_step_model');
+            // console.log('cannot get active_step_model');
             // Do something
         }
     }
@@ -178,7 +178,7 @@ export class DataStorageService {
         this.state = state;
         //advise components that the state has changed
         this.dispatchNewState(this.state);
-        console.log( "this.state has been updated in data storage:", this.state);
+        // console.log( "this.state has been updated in data storage:", this.state);
     }
     
     //communicate from component to the Store the changed datas with customer action
@@ -264,10 +264,11 @@ export class DataStorageService {
             .get(url, httpOptions)
             .pipe(
                 tap((response) => {
-                    console.log(`response for ${url}:`, response)})
+                    // console.log(`response for ${url}:`, response)
+                })
             )
             .subscribe( data => {
-                console.log('data:', data);
+                // console.log('data:', data);
                 },
                 error => this.handleErrors(error)
             )
@@ -287,7 +288,7 @@ export class DataStorageService {
             direction:direction,
             customer:customer,
         };
-        console.log('postData :', postData);
+        // console.log('postData :', postData);
         this.http
             .post(
                 url,
@@ -295,7 +296,8 @@ export class DataStorageService {
                 httpOptions)
             .pipe(
                 tap((response) => {
-                    console.log(`response for ${url}:`, response)})
+                    // console.log(`response for ${url}:`, response)
+                })
             )
             .subscribe( receivedData => {
                     // let dataa = receivedData["data"];
@@ -331,7 +333,8 @@ export class DataStorageService {
             .get(url)
             .pipe(
                 tap((response) => {
-                    console.log(`response for ${url}:`, response)})
+                    // console.log(`response for ${url}:`, response)
+                })
             )
             .subscribe( 
                 receivedData => {
@@ -348,9 +351,9 @@ export class DataStorageService {
                     this.booking = data["booking_object"];
                     this.customer = data["customer"];
                     this.step_name = data["step_name"];
-                    console.log('this.step_name :', this.step_name);
+                    // console.log('this.step_name :', this.step_name);
                     this.active_step_model = this.GetStepModelFromStepName(this.step_name);
-                    console.log('this.active_step_model :', this.active_step_model);
+                    // console.log('this.active_step_model :', this.active_step_model);
                     this.displayStep(this.active_step_model.name);
                     this.disablePrevBtn(true);
                     this.disableNextBtn(true);
@@ -367,7 +370,7 @@ export class DataStorageService {
             .get(url)
             .pipe(
                 tap((response) => {
-                    console.log(`response for ${url}:`, response);
+                    // console.log(`response for ${url}:`, response);
                 })
             )
             .subscribe( receivedData => {
@@ -388,9 +391,9 @@ export class DataStorageService {
                     // return array;
                 }
                 this.steps_models = array;
-                console.log('this steps_models', this.steps_models);
+                // console.log('this steps_models', this.steps_models);
                 this.active_step_model = this.steps_models[0];
-                console.log('this.active_step_model :', this.active_step_model);
+                // console.log('this.active_step_model :', this.active_step_model);
                 // this.dbService.addStepsToDataBase(this.steps_models);
                 this.booking = data["booking"];
                 // this.dbService.addBookingToDataBase(this.booking);
@@ -408,12 +411,12 @@ export class DataStorageService {
             .get(url)
             .pipe(
                 tap((response) => {
-                    console.log(`response for ${url}:`, response);
+                    // console.log(`response for ${url}:`, response);
                 }),
             )
             .subscribe( receivedData => {
                 let data = receivedData["data"];
-                console.log('data: ',data);
+                // console.log('data: ',data);
                 this.dispatchResponseReceived(data);
                 },
                 error => this.handleErrors(error)
@@ -437,12 +440,12 @@ export class DataStorageService {
                 httpOptions)
             .pipe(
                 tap((response) => {
-                    console.log(`response for ${url}:`, response);
+                    // console.log(`response for ${url}:`, response);
                 })
             )
             .subscribe( receivedData => {
                 this.dispatchSuccessInfos(receivedData);
-                console.log('receivedData: ',receivedData);
+                // console.log('receivedData: ',receivedData);
                 
                 },
                 error => {
@@ -456,13 +459,13 @@ export class DataStorageService {
 
     //pass errorInfo to suscribers Component
     dispatchErrorInfos(value:any){
-        console.log('je dispatch les infos erreurs');
+        // console.log('je dispatch les infos erreurs');
         return this.advise_errorMessage_ds.next(value);
     }
 
     //pass successInfo to suscribers Component
     dispatchSuccessInfos(value:any){
-        console.log('je dispatch les infos succes');
+        // console.log('je dispatch les infos succes');
         return this.advise_successMessage_ds.next(value);
     }
 
@@ -471,8 +474,8 @@ export class DataStorageService {
     //that will gather all messages error, exepted for authentication
     // authentication must keep separated
     handleErrors(error){
-        console.log('error:', error);
-                console.log('error.error.code:', error.error.code);
+        // console.log('error:', error);
+                // console.log('error.error.code:', error.error.code);
                 if(error.error.code){
                     switch(error.error.code) {
                         case "[jwt_auth] invalid_username":
@@ -499,7 +502,7 @@ export class DataStorageService {
                 }
                 //this will pass the error to the components which have subscribe to it.
                 this.dispatchErrorInfos(this.errorMessage);
-                console.log('this.errorMessage:', this.errorMessage);
+                // console.log('this.errorMessage:', this.errorMessage);
     }
 
     //to be tested separatly

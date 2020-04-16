@@ -6,6 +6,14 @@ $nb-enable-css-custom-properties: true;
 
 $nb-themes: nb-register-theme((
 
+//1 - couleur appel contrast
+//2 - couleur fond clair
+//3 - couleur fond boutons + icones
+//4 - couleur texte boutons
+//5 - couleur "theme_color" wm
+//6 - couleur "background_color" wm
+//7 - couleur "contend" index.html
+
 //here replace the colors by the customer theme
   color-primary-100: #F3FBE8,
   color-primary-200: #EDEDED,

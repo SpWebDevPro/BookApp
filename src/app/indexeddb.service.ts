@@ -71,8 +71,8 @@ export class dbService extends Dexie{
             return this.serverresponse
             .get(id)
             .then( async(result) => {
-                console.log('[localDB]: j\'ai trouvé un match pour l id:', id);
-                console.log('result:', result);
+                // console.log('[localDB]: j\'ai trouvé un match pour l id:', id);
+                // console.log('result:', result);
                 return result;
             })
             .catch( err => console.log('error when findMatchIdInDB:', err.stack || err));
@@ -85,7 +85,7 @@ export class dbService extends Dexie{
             this.serverresponse
             .put(navigationObject)
             .then( async() => {
-                console.log('[localDB]: navigationObject saved');
+                // console.log('[localDB]: navigationObject saved');
             })
             .catch( err => console.log('error when addServerResponseToDataBase:', err.stack || err));
         })
@@ -93,7 +93,7 @@ export class dbService extends Dexie{
 
     clearStore(){
         this.serverresponse.clear();
-        console.log('le store est clean!');
+        // console.log('le store est clean!');
     }
 
     // addStepsToDataBase(steps:Step[]):Promise<any> {

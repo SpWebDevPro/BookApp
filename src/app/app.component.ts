@@ -110,9 +110,9 @@ export class AppComponent implements OnInit, OnDestroy {
             //lets use the datas in indexed db to display the page
             this.dbService.findMatchIdInDB(event.restoredState.navigationId)
             .then ( result => {
-              console.log( 'resolve in app cpt:', result);
+              // console.log( 'resolve in app cpt:', result);
               if (result && (result.route === '/' || result.route === '/welcome' || result.route ==='/user')){
-                console.log(result);
+                // console.log(result);
                 this.dataStorageService.setStateFromIdb(result.state);
                 router.navigate([result.route]);
               }
@@ -148,13 +148,13 @@ export class AppComponent implements OnInit, OnDestroy {
     this.isIos = /iphone|ipad|ipod/.test(this.userAgent);
     this.isMobileDevice = /Mobi|mobi/.test(this.userAgent) || /Android/.test(this.userAgent);
     this.isStandaloneMode = window.matchMedia('(display-mode:standalone)').matches;
-    console.group("Browser and Device infos");
-    console.log('isIos:', this.isIos);
-    console.log('this.browser:', this.browser);
-    console.log('this.userAgent:', this.userAgent);
-    console.log('isMobileDevice:', this.isMobileDevice);
-    console.log('this.isStandaloneMode:', this.isStandaloneMode);
-    console.groupEnd();
+    // console.group("Browser and Device infos");
+    // console.log('isIos:', this.isIos);
+    // console.log('this.browser:', this.browser);
+    // console.log('this.userAgent:', this.userAgent);
+    // console.log('isMobileDevice:', this.isMobileDevice);
+    // console.log('this.isStandaloneMode:', this.isStandaloneMode);
+    // console.groupEnd();
 
     if(this.isIos && !this.isStandaloneMode && this.isMobileDevice){
       //here we should triger a pop up window explaining how to install app
@@ -190,13 +190,13 @@ export class AppComponent implements OnInit, OnDestroy {
   //******************************
 
     this.swUpdate.available.subscribe( event => {
-      console.log(event);
+      // console.log(event);
       this.pwaService.PromtNewVersion(true);
     })
 
     this.newVersionAvailableSub = this.pwaService.advise_new_version_available.subscribe((IsnewVersion) => {
       this.newVersionAvailable = IsnewVersion;
-      console.log('a new version of the app is available');
+      // console.log('a new version of the app is available');
       // if newVersionAvailable === true, a div is prompting the user to update
       if (this.newVersionAvailable === true ){
         this.headerAndFooterDisabled = false;
@@ -226,7 +226,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.btnNextIsDisabledSub = this.dataStorageService.change_NextButtonDisabled
       .subscribe((value:Boolean) => {
         this.active_step_model = this.dataStorageService.getState().active_step_model;
-        console.log('this.active_step_model.name:', this.active_step_model);
+        // console.log('this.active_step_model.name:', this.active_step_model);
         if (this.active_step_model.name === 'verify'){
             // console.log('i am blured');
             document.getElementById('next').blur();

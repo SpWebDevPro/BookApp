@@ -10,6 +10,9 @@ export class ServiceCardComponent implements OnInit {
   @Input() service:any;
   @Input() selectedCard:any;
   service_duration:string;
+  service_pricemin:string;
+  displaydevise:Boolean = true;
+  
   
   constructor() {}
 
@@ -20,7 +23,15 @@ export class ServiceCardComponent implements OnInit {
     else {
       this.service_duration = '';
     }
-    
+    if (this.service.price_min === '0.00'){
+      this.service_pricemin = '';
+      this.displaydevise = false;
+    }
+    else {
+      this.service_pricemin = this.service.price_min;
+    }
   }
+    
+
 
 }

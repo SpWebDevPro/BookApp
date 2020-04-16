@@ -15,14 +15,14 @@ export class NavigationService {
     }
 
     displayNavigationInfo(event){
-        console.group("NavigationStart Event");
-          console.log("navigation id: ", event.id);
-          console.log("route:", event.url);
-          console.log("trigger:", event.navigationTrigger);
+        // console.group("NavigationStart Event");
+        //   console.log("navigation id: ", event.id);
+        //   console.log("route:", event.url);
+        //   console.log("trigger:", event.navigationTrigger);
           if (event.restoredState){
             console.warn("restoring navigation id:", event.restoredState.navigationId);
           }
-          console.groupEnd();
+          // console.groupEnd();
     }
 
     SaveNavigationInfo(navObject){

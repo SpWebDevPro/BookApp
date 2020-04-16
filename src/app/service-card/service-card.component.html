@@ -16,7 +16,7 @@
         </nb-user>
         <div fxLayout="column" fxLayoutAlign="space-between">
             <p class="service-duration">{{service_duration}} min.</p>
-            <p class="service-price" fxFlexAlign="end">{{service.price_min}}€</p>
+            <p class="service-price" fxFlexAlign="end">{{service_pricemin}}<span *ngIf="displaydevise">€</span></p>
         </div>
     </nb-card-body>
 </nb-card>
