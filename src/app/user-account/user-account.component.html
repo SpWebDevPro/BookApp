@@ -1,5 +1,8 @@
+<div class="spiner" fxLayout="column" fxLayoutAlign="center" *ngIf="isLoading">
+        <app-loding-spinner></app-loding-spinner>
+</div>
+<div *ngIf="!isLoading">
 <div class="newRDVbtn" fxLayout="row" fxLayoutAlign="end">
-    <!-- <button nbButton size="small" status="primary" [routerLink]="['/welcome']" routerLinkActive="router-link-active" >Prendre un nouveau RDV</button> -->
     <button nbButton size="small" status="primary"  (click)="GoToFirstStep()" >Prendre un nouveau RDV</button>
 </div>
 <div class="bookings" fxLayout="row" fxLayoutAlign="center">
@@ -30,5 +33,6 @@
             </nb-accordion-item-body>
         </nb-accordion-item>
     </nb-accordion>
+</div>
 </div>
 </div>

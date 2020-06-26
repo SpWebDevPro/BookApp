@@ -99,6 +99,7 @@ export class DataStorageService {
     }
 
     dispatchIsLoadingStatus(value:Boolean){
+        //console.log('i am in dispatchisloadingstatus');
         return this.change_is_Loading_data.next(value);
     }
 
@@ -296,14 +297,11 @@ export class DataStorageService {
                 httpOptions)
             .pipe(
                 tap((response) => {
-                    // console.log(`response for ${url}:`, response)
+                    console.log(`response for ${url}:`, response)
                 })
             )
             .subscribe( receivedData => {
-                    // let dataa = receivedData["data"];
-                    // let data = dataa.data;
                     let data = receivedData["data"];
-                    // this.dispatchResponseReceived(data);
                     this.show_next_btn = data["show_next_btn"];
                     this.show_prev_btn = data["show_prev_btn"];
                     this.is_first_step = data["is_first_step"];
@@ -313,6 +311,7 @@ export class DataStorageService {
                     this.booking = data["booking_object"];
                     this.customer = data["customer"];
                     this.restrictions = data["restrictions"];
+                    // console.log('restrictions:', this.restrictions);
                     this.step_name = data["step_name"];
                     this.active_step_model = this.GetStepModelFromStepName(data["step_name"]);
                     this.displayStep(this.checkStepToDisplay().name);
@@ -333,7 +332,7 @@ export class DataStorageService {
             .get(url)
             .pipe(
                 tap((response) => {
-                    // console.log(`response for ${url}:`, response)
+                    console.log(`response for ${url}:`, response)
                 })
             )
             .subscribe( 
@@ -351,16 +350,16 @@ export class DataStorageService {
                     this.booking = data["booking_object"];
                     this.customer = data["customer"];
                     this.step_name = data["step_name"];
-                    // console.log('this.step_name :', this.step_name);
                     this.active_step_model = this.GetStepModelFromStepName(this.step_name);
-                    // console.log('this.active_step_model :', this.active_step_model);
                     this.displayStep(this.active_step_model.name);
                     this.disablePrevBtn(true);
                     this.disableNextBtn(true);
                     this.dispatchIsLoadingStatus(false);
 
                 },
-                error => this.handleErrors(error)
+                error => {
+                    this.handleErrors(error);
+                }
             )
     }
     
@@ -370,15 +369,11 @@ export class DataStorageService {
             .get(url)
             .pipe(
                 tap((response) => {
-                    // console.log(`response for ${url}:`, response);
+                    console.log(`response for ${url}:`, response);
                 })
             )
             .subscribe( receivedData => {
-                // let dataa = receivedData["data"];
-                // let data = dataa.data;
                 let data = receivedData["data"];
-                // this.dispatchResponseReceived(data);
-
                 // quick fix to remove location in case it is created in backend, to avoid any bug
                 //we will check if locations is in steps_models, and if, so will remove it
                 // this.steps_models = data["steps_models"];
@@ -416,7 +411,6 @@ export class DataStorageService {
             )
             .subscribe( receivedData => {
                 let data = receivedData["data"];
-                // console.log('data: ',data);
                 this.dispatchResponseReceived(data);
                 },
                 error => this.handleErrors(error)
@@ -445,8 +439,7 @@ export class DataStorageService {
             )
             .subscribe( receivedData => {
                 this.dispatchSuccessInfos(receivedData);
-                // console.log('receivedData: ',receivedData);
-                
+                this.getUserAccountDetails();
                 },
                 error => {
                     this.handleErrors(error);
@@ -459,13 +452,15 @@ export class DataStorageService {
 
     //pass errorInfo to suscribers Component
     dispatchErrorInfos(value:any){
-        // console.log('je dispatch les infos erreurs');
+        console.log('je dispatch les infos erreurs');
+        //this.dispatchIsLoadingStatus(false);
         return this.advise_errorMessage_ds.next(value);
     }
 
     //pass successInfo to suscribers Component
     dispatchSuccessInfos(value:any){
         // console.log('je dispatch les infos succes');
+        //this.dispatchIsLoadingStatus(false);
         return this.advise_successMessage_ds.next(value);
     }
 
@@ -474,34 +469,29 @@ export class DataStorageService {
     //that will gather all messages error, exepted for authentication
     // authentication must keep separated
     handleErrors(error){
-        // console.log('error:', error);
-                // console.log('error.error.code:', error.error.code);
+        console.log('error in handle error:', error);
+        console.log('error.status:', error.status);
+        console.log('error.error.code:', error.error.code);
                 if(error.error.code){
                     switch(error.error.code) {
-                        case "[jwt_auth] invalid_username":
-                            this.errorMessage = "Identifiant erronné"; 
-                            break;
-                        case "[jwt_auth] too_many_retries":
-                            this.errorMessage = "Trop de tentatives de connexion, réessayez ultérieurement"; 
-                            break;
-                        case "[jwt_auth] incorrect_password":
-                            this.errorMessage = "Mot de passe erronné"; 
-                            break;
                         case "jwt_auth_invalid_token":
                             this.errorMessage = "Votre connexion précédente est trop ancienne. Vous devez vous reconnecter";
-                            //here will need to logout and redirect to user
-                            // this.authenticationService.logOutUser();
-                            // this.authenticationService.goToAuthenticate();
                             break;
                         default:
                             this.errorMessage = "Une erreur s'est produite"; 
                     }
                 }
                 else {
-                    this.errorMessage = error.message;
+                    if (error.status == 0 || error.status == 504){
+                        this.errorMessage = "Service non disponible"; 
+                    } else {
+                        this.errorMessage = error.message;
+                    }
+                    
                 }
                 //this will pass the error to the components which have subscribe to it.
                 this.dispatchErrorInfos(this.errorMessage);
+                this.dispatchIsLoadingStatus(false);
                 // console.log('this.errorMessage:', this.errorMessage);
     }
 
@@ -518,22 +508,5 @@ export class DataStorageService {
       }
 
 
-//TODO : handle error quand le token est périmé
-// GET https://interesting-novelist.flywheelsites.com/wp-json/apiBookApp/start 403
-// data-storage.service.ts:397 error: HttpErrorResponse {headers: HttpHeaders, status: 403, statusText: "OK", url: "https://interesting-novelist.flywheelsites.com/wp-json/apiBookApp/start", ok: false, …}
-// data-storage.service.ts:398 error.error.code: jwt_auth_invalid_token
-// data-storage.service.ts:384 je dispatch les infos erreurs
-// data-storage.service.ts:419 this.errorMessage: Une erreur s'est produit
-
-//TODO
-// //error: ProgressEvent {isTrusted: true, lengthComputable: false, loaded: 0, total: 0, type: "error", …}
-// headers: aP {normalizedNames: Map(0), lazyUpdate: null, headers: Map(0)}
-// message: "Http failure response for https://interesting-novelist.flywheelsites.com/wp-json/apiBookApp/start: 0 Unknown Error"
-// name: "HttpErrorResponse"
-// ok: false
-// status: 0
-// statusText: "Unknown Error"
-// url: "https://interesting-novelist.flywheelsites.com/wp-json/apiBookApp/start"
-// __proto__: hP
 
 }

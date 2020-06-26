@@ -77,6 +77,7 @@ export class ConfirmationComponent implements OnInit {
 
     if (this.booking_id){
       this.message_confirmation = this.step.description;
+      this.dataStorageService.changeBtnMenu("Continuer");
     }
     else {
       this.message_confirmation = "une erreur est survenue, veuillez re-essayer ultérieurement";

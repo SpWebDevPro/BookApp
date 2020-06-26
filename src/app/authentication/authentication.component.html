@@ -9,13 +9,18 @@
                 <!-- registerForm -->
                 <div class="register" *ngIf="displayRegister">
                     <form class="form-form" fxLayout="column" fxLayoutGap="10px" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-                        <!-- <input type="text" nbInput fullWidth placeholder="Identifiant*" [formControlName]="'username'">
-                        <span class="error-message" *ngIf="!registerForm.get('username').valid && registerForm.get('username').touched">Entrez un identifiant valide</span> -->
                         <input type="text" nbInput fullWidth placeholder="Email*" [formControlName]="'email'">
                         <span class="error-message" *ngIf="!registerForm.get('email').valid && registerForm.get('email').touched">Entrez un email valide</span>
-                        <input type="text" nbInput fullWidth placeholder="Mot de passe*" [formControlName]="'password'">
+                        <div fxLayout="row">
+                        <input [type]="getInputType()" nbInput fullWidth placeholder="Mot de passe*" [formControlName]="'password'">
+                        <nb-icon class="pswdiscret" [icon]=" showPassword ? 'eye-outline' : 'eye-off-2-outline'"
+                        [attr.aria-label]="showPassword ? 'hide password' : 'show password'"
+                        (click)="toggleShowPassword()">
+                        </nb-icon>
+                        </div>
                         <span class="error-message" *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched">Entrez un mot de passe valide</span>
                         <span class="tip-message">Le mot de passe doit contenir au minimum 8 caractères, une majuscule, une lettre et un nombre</span>
+                       
                         <div class="form-valid" fxLayout="column" fxLayoutAlign="center">
                             <button [disabled]="!registerForm.valid" class="form-button" type="submit" nbButton>Continuer</button>
                         </div>
@@ -38,9 +43,26 @@
                     <form class="form-form" fxLayout="column" fxLayoutGap="10px" [formGroup]="changePasswordForm" (ngSubmit)="onSubmit()">
                         <input type="text" nbInput fullWidth placeholder="Clé reçue par email*" [formControlName]="'tokenPassword'">
                         <span class="error-message" *ngIf="!changePasswordForm.get('tokenPassword').valid && changePasswordForm.get('tokenPassword').touched">Entrez une clé secrete valide</span>
-                        <input type="text" nbInput fullWidth placeholder="Mot de passe*" [formControlName]="'password'">
+                        <div fxLayout="row">
+                            <input [type]="getInputType()" nbInput fullWidth placeholder="Mot de passe*" [formControlName]="'password'">
+                            <nb-icon class="pswdiscret" [icon]=" showPassword ? 'eye-outline' : 'eye-off-2-outline'"
+                                            [attr.aria-label]="showPassword ? 'hide password' : 'show password'"
+                                            (click)="toggleShowPassword()">
+                            </nb-icon>
+                        </div>
                         <span class="error-message" *ngIf="!changePasswordForm.get('password').valid && changePasswordForm.get('password').touched">Entrez un mot de passe valide</span>
-                        <input type="text" nbInput fullWidth placeholder="Confirmation du mot de passe*" [formControlName]="'confirmedPassword'">
+                        <div fxLayout="row">
+                            <input [type]="getInputType()" nbInput fullWidth placeholder="Confirmation du mot de passe*" [formControlName]="'confirmedPassword'">
+                            <nb-icon class="pswdiscret" [icon]=" showPassword ? 'eye-outline' : 'eye-off-2-outline'"
+                                            [attr.aria-label]="showPassword ? 'hide password' : 'show password'"
+                                            (click)="toggleShowPassword()">
+                            </nb-icon>
+                            <!-- <nb-icon class="pswdiscret" [icon]=" showPassword ? 'eye-outline' : 'eye-off-2-outline'"
+                                            [pack]="eva"
+                                            [attr.aria-label]="showPassword ? 'hide password' : 'show password'"
+                                            (click)="toggleShowPassword()">
+                            </nb-icon> -->
+                        </div>
                         <span class="error-message" *ngIf="!changePasswordForm.get('confirmedPassword').valid && changePasswordForm.get('confirmedPassword').touched">Les deux mots de passe ne correspondent pas</span>
                         <span class="tip-message">Le mot de passe doit contenir au minimum 8 caractères, une majuscule, une lettre et un nombre</span>
                         <div class="form-valid" fxLayout="column" fxLayoutAlign="center">
@@ -52,11 +74,15 @@
                 <!-- loginForm -->
                 <div class="login" *ngIf="displayLogin">
                     <form class="form-form" fxLayout="column" fxLayoutGap="10px" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                        <!-- <input type="text" nbInput fullWidth placeholder="Identifiant*" [formControlName]="'username'">
-                        <span class="error-message" *ngIf="!loginForm.get('username').valid && loginForm.get('username').touched">Entrez un identifiant valide</span> -->
                         <input type="text" nbInput fullWidth placeholder="Email*" [formControlName]="'email'">
                         <span class="error-message" *ngIf="!loginForm.get('email').valid && loginForm.get('email').touched">Entrez un identifiant valide</span>
-                        <input type="text" nbInput fullWidth placeholder="Mot de passe*" [formControlName]="'password'">
+                        <div fxLayout="row">
+                                <input [type]="getInputType()" nbInput fullWidth placeholder="Mot de passe*" [formControlName]="'password'">
+                                <nb-icon class="pswdiscret" [icon]=" showPassword ? 'eye-outline' : 'eye-off-2-outline'"
+                                        [attr.aria-label]="showPassword ? 'hide password' : 'show password'"
+                                        (click)="toggleShowPassword()">
+                                </nb-icon>
+                        </div>
                         <span class="error-message" *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">Entrez un mot de passe valide</span>
                         <div class="form-valid" fxLayout="column" fxLayoutAlign="center">
                             <button [disabled]="!loginForm.valid" class="form-button" type="submit" nbButton>Continuer</button>

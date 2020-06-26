@@ -4,7 +4,8 @@ import { NbLayoutModule, NbCardModule, NbThemeModule, NbActionsModule,
             NbCalendarModule, 
             NbSelectModule,
             NbInputModule,
-            NbAccordionModule} from '@nebular/theme';
+            NbAccordionModule,
+            } from '@nebular/theme';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { FlexLayoutModule } from '@angular/flex-layout';

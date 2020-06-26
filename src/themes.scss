@@ -6,6 +6,7 @@ $nb-enable-css-custom-properties: true;
 
 $nb-themes: nb-register-theme((
 
+//ARRIVER A TYPER 
 //1 - couleur appel contrast
 //2 - couleur fond clair
 //3 - couleur fond boutons + icones
@@ -15,51 +16,143 @@ $nb-themes: nb-register-theme((
 //7 - couleur "contend" index.html
 
 //here replace the colors by the customer theme
+
   color-primary-100: #F3FBE8,
+  //text welcome & bye (partial), reverse button welcome, selected hour text on button
+  //color-primary-100: rgb(250, 225, 3),
+
+  //background layout. Couleur light. si change penser à changer le fond des cartes
   color-primary-200: #EDEDED,
-  color-primary-300: #B0DE88,
-  color-primary-400: #86BE61,
+  
+          color-primary-300: #B0DE88,
+          //not used
+
+          color-primary-400: #86BE61,
+          //not used
+
   color-primary-500: #549434,
-  color-primary-600: #3E7F26,
-  color-primary-700: #2A6A1A,
-  color-primary-800: #1A5510,
-  color-primary-900: #0E4709,
-  color-success-100: #CCFBD1,
-  color-success-200: #9BF8AD,
+  // Appel contrast ( button, spinner, icons, available, selected, WelcomeGround, ByeGround)
+  //color-primary-500: rgb(255, 0, 85),
+
+          color-primary-600: #3E7F26,
+          //not used
+
+          color-primary-700: #2A6A1A,
+          //not used
+
+          color-primary-800: #1A5510,
+          //not used
+
+          color-primary-900: #0E4709,
+          //not used
+
+          color-success-100: #CCFBD1,
+          //not used
+
+          color-success-200: #9BF8AD,
+          //not used
+
   color-success-300: #67EA8E,
-  color-success-400: #40D57B,
-  color-success-500: #0DBA63,
-  color-success-600: #099F63,
+  //ground in succes messages
+
+          color-success-400: #40D57B,
+          //not used
+
+          color-success-500: #0DBA63,
+          //not used
+
+          color-success-600: #099F63,
+          //not used
+
   color-success-700: #06855F,
-  color-success-800: #046B56,
-  color-success-900: #025950,
-  color-info-100: #C8F7FA,
-  color-info-200: #93E9F5,
-  color-info-300: #5AC8E2,
-  color-info-400: #31A0C5,
-  color-info-500: #006DA0,
-  color-info-600: #005489,
-  color-info-700: #003F73,
-  color-info-800: #002D5C,
-  color-info-900: #00204C,
-  color-warning-100: #FEF5CB,
-  color-warning-200: #FEE898,
-  color-warning-300: #FDD665,
-  color-warning-400: #FBC53E,
-  color-warning-500: #F9AA00,
-  color-warning-600: #D68B00,
-  color-warning-700: #B36E00,
-  color-warning-800: #905400,
-  color-warning-900: #774200,
-  color-danger-100: #FDE3D6,
-  color-danger-200: #FBC2AE,
+  //text in success message
+
+          color-success-800: #046B56,
+          //not used
+
+          color-success-900: #025950,
+          //not used
+
+          color-info-100: #C8F7FA,
+          //not used
+
+          color-info-200: #93E9F5,
+          //not used
+
+          color-info-300: #5AC8E2,
+          //not used
+
+          color-info-400: #31A0C5,
+          //not used
+
+          color-info-500: #006DA0,
+          //not used
+
+          color-info-600: #005489,
+          //not used
+
+          color-info-700: #003F73,
+          //not used
+
+          color-info-800: #002D5C,
+          //not used
+
+          color-info-900: #00204C,
+          //not used
+
+          color-warning-100: #FEF5CB,
+          //not used
+
+          color-warning-200: #FEE898,
+          //not used
+
+          color-warning-300: #FDD665,
+          //not used
+
+          color-warning-400: #FBC53E,
+          //not used
+
+          color-warning-500: #F9AA00,
+          //not used
+
+          color-warning-600: #D68B00,
+          //not used
+
+          color-warning-700: #B36E00,
+          //not used
+
+          color-warning-800: #905400,
+          //not used
+
+          color-warning-900: #774200,
+          //not used
+
+          color-danger-100: #FDE3D6,
+          //not used
+
+          color-danger-200: #FBC2AE,
+          //not used
+
   color-danger-300: #F49784,
-  color-danger-400: #E96F63,
+  //ground in error message
+
+          color-danger-400: #E96F63,
+          //not used
+
   color-danger-500: #DB3434,
+  //text in error message
+
   color-danger-600: #BC2633,
-  color-danger-700: #9D1A30,
-  color-danger-800: #7F102D,
-  color-danger-900: #69092A,
+  //text in error message, cancelled, happy hour
+
+          color-danger-700: #9D1A30,
+          //not used
+
+          color-danger-800: #7F102D,
+          //not used
+
+          color-danger-900: #69092A,
+          //not used
 
 
   font-family-primary: "Open Sans, sans-serif",
@@ -67,18 +160,34 @@ $nb-themes: nb-register-theme((
 
   text-heading-1-font-family:font-family-secondary,
   text-heading-1-font-weight:400,
+
   text-heading-6-color:#333,
+  //prix des services
+
   text-heading-6-font-weight:600,
   text-paragraph-font-size:1rem,
 
   button-text-font-weight: 700,
+
+  // for buttons in welcome and bye
   button-filled-info-background-color: color-primary-100,
+
   button-filled-info-border-color: color-primary-100,
+
+  //for buttons in welcome and bye component, and also focus and active for select hour in calendar
   button-filled-info-text-color: color-primary-500,
+
   button-filled-primary-hover-background-color : color-primary-500,
   button-filled-primary-hover-border-color: color-primary-500,
 
-  layout-background-color:color-primary-200,
+  
+  layout-background-color:background-basic-color-2,
+
+  //card-background-color: color-primary-200,
+  //card-text-color:
+  //card-border-color:
+
+
   background-primary-color-1: color-primary-500,
 
   card-border-radius:0.40rem,

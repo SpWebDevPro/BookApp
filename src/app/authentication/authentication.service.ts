@@ -66,6 +66,7 @@ export class AuthenticationService{
                 this.dataStorageService.dispatchIsLoadingStatus(false);
                 this.successMessage = "Votre compte a bien été créé";
                 this.dispatchSuccessInfos(this.successMessage);
+                this.errorMessage = '';
             },
             error => {
                 this.dataStorageService.dispatchIsLoadingStatus(false);

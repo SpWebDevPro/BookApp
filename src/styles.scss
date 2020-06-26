@@ -10,23 +10,6 @@
 
 /*General Rules */
 
-//to consider for animation
-
-// :host {
-//   overflow:hidden;
-
-//   .router-wrap {
-//     position:relative;
-//   }
-
-//  router-outlet ~ * {
-//     position: absolute;
-//     width:100%;
-//     height:100%;
-//   }
-// }
-
-
 
 body {
   /*rules for PWA IOS*/
@@ -47,7 +30,6 @@ body {
 }
 
 /*Rules for cards */
-
 
 nb-user.size-large .user-title {
   text-align: left;
@@ -115,9 +97,7 @@ nb-card.accent {
 .material-icons.icon-message{
   margin-right: 6px;
 }
-// .material-icons.icon-menu{
-//   margin-right: 10px;
-// }
+
 
 .material-icons.primary { color:nb-theme(color-primary-500)};
 .material-icons.discret { color:nb-theme(color-basic-600)};

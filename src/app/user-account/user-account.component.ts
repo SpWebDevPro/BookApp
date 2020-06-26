@@ -11,17 +11,15 @@ import { HelperCalendarService } from '../helper-calendar.service';
 })
 export class UserAccountComponent implements OnInit, OnDestroy {
 
-  errorAdviseMessage:Subscription;
-  // errorMessage:string = null;
+  isLoading:Boolean;
 
+  errorAdviseMessage:Subscription;
   successAdviseMessage:Subscription;
-  // successMessage:string = null;
 
   receivedData:Subscription;
   bookings:any = null;
   sortedBookings:any;
   today:any;
-
 
   constructor(
     private dataStorageService:DataStorageService,
@@ -29,37 +27,34 @@ export class UserAccountComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.dataStorageService.getUserAccountDetails();
     this.dataStorageService.displayHeaderAndFooter(false);
     this.dataStorageService.displayNavButtonDiv(true);
     this.today= this.getToday();
-    // console.log(this.today);
+    console.log(this.today);
     this.errorAdviseMessage = this.dataStorageService.advise_errorMessage_ds.subscribe(
       (error) => {
         this.dataStorageService.openDialog(error, null);
-        // this.errorMessage = error;
       });
     this.successAdviseMessage = this.dataStorageService.advise_successMessage_ds.subscribe(
       (success) => {
-        // console.log('success:', success['message']);
         this.dataStorageService.openDialog(null, success['message']);
-        // this.successMessage = success.message;
       });
     this.receivedData = this.dataStorageService.advise_recieved_response_from_server.subscribe(
       (receiveddata:any) => {
-        // console.log('jai reçu les nouveaux bookings');
+        this.isLoading = false;
         this.bookings = receiveddata;
-        // console.log('receiveddata:', receiveddata);
+        console.log('this.bookings :', this.bookings);
         let shortedBookings = this.shortBookings(this.bookings);
-        // console.log('shortedBookings:', shortedBookings);
         this.sortedBookings = this.sortBookings(shortedBookings);
-        // console.log('sortedBookings:', this.sortedBookings);
+        console.log('this.sortedBookings:', this.sortedBookings);
+
       }
     )
   }
 
   cancelBooking(id){
-    // console.log('je veux annuler le booking id: ', id);
     this.dataStorageService.cancelBooking(id);
     this.dataStorageService.getUserAccountDetails();
   }
@@ -86,12 +81,10 @@ export class UserAccountComponent implements OnInit, OnDestroy {
   }
 
   getDateHourBooking(booking){
-    // console.log(booking);
     let hour:string;
     hour = this.helperCalendarService.convertMinToHours(booking.start_time);
     let niceDate:string;
     niceDate = booking.start_date.concat(' ', hour, ':00');
-    // console.log('niceDate: ', niceDate);
     let finalDate;
     return finalDate = new Date(niceDate);
   }
@@ -103,7 +96,6 @@ export class UserAccountComponent implements OnInit, OnDestroy {
   }
 
   GoToFirstStep(){
-    // console.log('i want to go to first step');
     this.dataStorageService.getFirstStepFromWP();
   }
 
@@ -113,7 +105,6 @@ export class UserAccountComponent implements OnInit, OnDestroy {
 
   shouldDisplayCancellButton(date, status){
     if (date >= this.today && status !== 'annulé'){
-      // console.log('true');
       return true
     }
     else {

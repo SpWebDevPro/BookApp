@@ -42,9 +42,14 @@
     color:nb-theme(color-basic-600);
     display: inline-block;
     text-align: left;
-    font-size:10px;
-    line-height: 12px;
+    font-size:14px;
+    line-height: 14px;
     margin: 2px 0 0;
+}
+
+.pswdiscret {
+    color: var(--input-basic-placeholder-text-color);
+    margin:10px;
 }
 
 .change_display {

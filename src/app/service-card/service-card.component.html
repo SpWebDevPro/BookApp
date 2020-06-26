@@ -6,15 +6,14 @@
             <p class="caption-2 happy-hours">{{service.category_name_service}}!</p>
         </div>
         </nb-card-header>
-    <nb-card-body fxLayout="row" fxLayoutGap="15px">
-
+    <nb-card-body fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between">
         <nb-user 
             name="{{service.name}}" 
             title="{{service.short_description}}"
             size="large"
             picture="{{service.thumbnail_url}}">
         </nb-user>
-        <div fxLayout="column" fxLayoutAlign="space-between">
+        <div class="priceandduration" fxLayout="column" fxLayoutAlign="space-between">
             <p class="service-duration">{{service_duration}} min.</p>
             <p class="service-price" fxFlexAlign="end">{{service_pricemin}}<span *ngIf="displaydevise">€</span></p>
         </div>

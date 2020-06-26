@@ -15,6 +15,9 @@ import { Router } from '@angular/router';
 })
 export class WelcomeComponent implements OnInit, OnDestroy {
 
+  errorAdviseMessage:Subscription;
+  successAdviseMessage:Subscription;
+ 
   IsLoggedInSub:Subscription;
   isLoggedIn:Boolean;
   
@@ -64,6 +67,18 @@ export class WelcomeComponent implements OnInit, OnDestroy {
       this.authenticationService.logOutUser();
       // this.startProcess();
     }
+
+    this.errorAdviseMessage = this.dataStorageService.advise_errorMessage_ds.subscribe(
+      (error) => {
+        this.dataStorageService.openDialog(error, null);
+        // this.errorMessage = error;
+      });
+    this.successAdviseMessage = this.dataStorageService.advise_successMessage_ds.subscribe(
+      (success) => {
+        // console.log('success:', success['message']);
+        this.dataStorageService.openDialog(null, success['message']);
+        // this.successMessage = success.message;
+      });
 
     this.brand_Name_Application = this.dataStorageService.myBrand.name;
     this.brand_welcome_message = this.dataStorageService.myBrand.welcome;
@@ -143,6 +158,8 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     this.catched_prompt_installation_sub.unsubscribe();
     this.IsLoggedInSub.unsubscribe();
+    this.errorAdviseMessage.unsubscribe();
+    this.successAdviseMessage.unsubscribe();
   }
 
 }
