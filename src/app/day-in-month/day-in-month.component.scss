@@ -16,7 +16,6 @@
 
 
 [nbButton]:focus {
-    // box-shadow: 0 0 0 var(--button-outline-width) var(--button-filled-info-text-color);
     box-shadow: none;
     outline: none;
     color: nb-theme(color-primary-100) !important;
@@ -24,7 +23,6 @@
 }
 
 [nbButton]:active {
-    // box-shadow: 0 0 0 var(--button-outline-width) var(--button-filled-info-text-color);
     box-shadow: none;
     outline: none;
     color: nb-theme(color-primary-100) !important;

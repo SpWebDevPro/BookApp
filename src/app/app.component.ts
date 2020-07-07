@@ -241,6 +241,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.btnMenuAdviseChange = this.dataStorageService.change_btnMenu
       .subscribe((value:string) => {
         this.btnMenu = value;
+        if (this.btnMenu == 'Terminer'){
+          document.getElementById('next').className +=" btn-terminer";
+        }
+        console.log('this.btnMenu', this.btnMenu);
       });
 
     //check Authentication

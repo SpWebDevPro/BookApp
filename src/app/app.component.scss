@@ -7,11 +7,12 @@
     width: 100%;
 }
 
-nb-layout-column {
-    padding: nb-theme(layout-small-padding);
-    margin:0;
-    text-align:center;
-}
+// nb-layout-column {
+//     padding: nb-theme(layout-small-padding);
+//     margin:0;
+//     text-align:center;
+// }
+
 
 .footer-menu {
     position: fixed;
@@ -20,14 +21,18 @@ nb-layout-column {
     overflow: hidden;
 }
 
+[nbButton].appearance-filled.status-primary.btn-terminer {
+    background-color: var(--button-filled-primary-background-color);
+    //background-color: red;
+    border-color: var(--button-filled-primary-border-color);
+    color: var(--button-filled-primary-text-color);
+  }
 
-[nbButton].appearance-filled.status-primary {
+  [nbButton].appearance-filled.status-primary.btn-terminer:hover {
     background-color: var(--button-filled-primary-background-color);
     border-color: var(--button-filled-primary-border-color);
     color: var(--button-filled-primary-text-color);
-}
-
-
+  }
 
 .advise-app-install{
     margin-bottom:20px;
@@ -46,9 +51,6 @@ nb-layout-column {
 
 .btn-close {
     float: right;
-    // padding-top: 4px !important;
-    // padding-right: 4px !important;
-    // padding-bottom: 0 !important;
     padding:0 !important;
 }
 

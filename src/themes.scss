@@ -6,153 +6,157 @@ $nb-enable-css-custom-properties: true;
 
 $nb-themes: nb-register-theme((
 
-//ARRIVER A TYPER 
-//1 - couleur appel contrast
-//2 - couleur fond clair
-//3 - couleur fond boutons + icones
-//4 - couleur texte boutons
+
+//1 - couleur fond neutre
+//2 - couleur appel boutons + icones : color Appel primary contrast : A décliner en tons
+//3 et 4 - couleur fond secondaire // textes et bouttons
+
 //5 - couleur "theme_color" wm
 //6 - couleur "background_color" wm
 //7 - couleur "contend" index.html
+//8 - couleur logo init color ( should match text-info-color )
 
 //here replace the colors by the customer theme
+//the default theme colors are here : https://akveo.github.io/nebular/docs/design-system/default-theme
 
-  color-primary-100: #F3FBE8,
-  //text welcome & bye (partial), reverse button welcome, selected hour text on button
-  //color-primary-100: rgb(250, 225, 3),
 
-  //background layout. Couleur light. si change penser à changer le fond des cartes
-  color-primary-200: #EDEDED,
+// 1- couleur fond neutres
+//*************************
+        
+        /* Basic colors - for backgrounds and borders and texts */
+
+        color-basic-100: white,
+        color-basic-200: #f7f8fa,
+        color-basic-300: #edf0f4,
+        color-basic-400: #dde1eb,
+        color-basic-500:#c5cee0,
+        color-basic-600:#8f9bb3,
+        color-basic-700:#2e3a59,
+        color-basic-800:#222b45,
+        color-basic-900:#192038,
+        color-basic-1000:#151a30,
+        color-basic-1100: #131729,
+
+        background-basic-color-1: color-basic-100,
+        background-basic-color-2: color-basic-200,
+        background-basic-color-3: color-basic-300,
+        background-basic-color-4: color-basic-400,
+
+        border-basic-color-1: color-basic-100,
+        border-basic-color-2: color-basic-200,
+        border-basic-color-3: color-basic-300,
+        border-basic-color-4: color-basic-400,
+        border-basic-color-5: color-basic-500,
+
+
+                //fond neutre et carte blanches
+                layout-background-color: background-basic-color-2,
+                card-background-color: background-basic-color-1,
   
-          color-primary-300: #B0DE88,
-          //not used
+                //fond blanc et cartes neutres
+                // layout-background-color: background-basic-color-1,
+                // card-background-color: background-basic-color-2,
 
-          color-primary-400: #86BE61,
-          //not used
 
-  color-primary-500: #549434,
-  // Appel contrast ( button, spinner, icons, available, selected, WelcomeGround, ByeGround)
-  //color-primary-500: rgb(255, 0, 85),
+// 2- couleur Appel boutons + icones range : button, spinner, icons, available, selected
+//**************************************************************************************
+        
+        /* Primary  colors - for buttons, icons, spinner, selected */
+        
+        color-primary-100: #F3FBE8, //used in datepicker selection
+        color-primary-200: #EDEDED, //not used
+        color-primary-300: #B0DE88, //not used
+        color-primary-400: #86BE61, //not used
+        color-primary-500: #549434, //used in main button
+        color-primary-600: #3E7F26, //not used
+        color-primary-700: #2A6A1A, //not used
+        color-primary-800: #1A5510, //not used
+        color-primary-900: #0E4709, //not used
 
-          color-primary-600: #3E7F26,
-          //not used
 
-          color-primary-700: #2A6A1A,
-          //not used
 
-          color-primary-800: #1A5510,
-          //not used
+// 2- couleur Welcome & bye : will be soft or contrasted matching Appel
+//********************************************************************
 
-          color-primary-900: #0E4709,
-          //not used
+        //we will use us variable var(--background-primary-color-1); in
+        //background init
+        //background welcome
+        //background bye
 
-          color-success-100: #CCFBD1,
-          //not used
+        //ici on match avec primary, mais on peut choisir ce qu'on veut
+        background-primary-color-1:color-primary-500,
+        //background-primary-color-1:#00ff7e,
 
-          color-success-200: #9BF8AD,
-          //not used
+                //other in case
+                background-primary-color-2: color-primary-600, //not used
+                background-primary-color-3: color-primary-700, //not used
+                background-primary-color-4: color-primary-800, //not used
+                background-alternative-color-1:#222b45, //not used
+                background-alternative-color-2:#192038, //not used
+                background-alternative-color-3: #151a30, //not used
+                background-alternative-color-4: #101426, //not used
 
-  color-success-300: #67EA8E,
-  //ground in succes messages
 
-          color-success-400: #40D57B,
-          //not used
+        //we will use variable to update welcome, bye cpt
+        //var(--text-info-color) for text contrasted color;
+        //var(--button-filled-info-text-color)
+        //var(--button-filled-info-background-color)
 
-          color-success-500: #0DBA63,
-          //not used
+        text-info-color: color-info-100,
+        button-filled-info-text-color : color-info-200,
+        button-filled-info-background-color : color-info-300,
+        button-filled-info-focus-background-color : color-info-500,
 
-          color-success-600: #099F63,
-          //not used
+        
+        color-info-100: #F3FBE8, // main color for button
+        color-info-200: background-primary-color-1, //contrasted color text for button // could be something completely different
+        color-info-300: color-info-100, //leave this like that
+        
+                //other should tones of color-info should be used for focus and selected
+                color-info-400:#2c2e31,//not used
+                color-info-500:#B0DE88, // color on focus
+                color-info-600:#6b7076,//not used
+                color-info-700: #003F73,//not used
+                color-info-800: #002D5C,//not used
+                color-info-900: #00204C,//not used
 
-  color-success-700: #06855F,
-  //text in success message
 
-          color-success-800: #046B56,
-          //not used
 
-          color-success-900: #025950,
-          //not used
 
-          color-info-100: #C8F7FA,
-          //not used
 
-          color-info-200: #93E9F5,
-          //not used
+         
+// 4- other colors for communication, messages
+// *******************************************
 
-          color-info-300: #5AC8E2,
-          //not used
+        color-success-100: #CCFBD1, //not used
+        color-success-200: #9BF8AD,//not used
+        color-success-300: #67EA8E, //ground in succes messages
+        color-success-400: #40D57B,//not used
+        color-success-500: #0DBA63,//not used
+        color-success-600: #099F63,//not used
+        color-success-700: #06855F,//text in success message
+        color-success-800: #046B56,//not used
+        color-success-900: #025950,//not used
+        
+        color-warning-100: #FEF5CB,//not used
+        color-warning-200: #FEE898,//not used
+        color-warning-300: #FDD665,//not used
+        color-warning-400: #FBC53E,//not used
+        color-warning-500: #F9AA00,//not used
+        color-warning-600: #D68B00,//not used
+        color-warning-700: #B36E00,//not used
+        color-warning-800: #905400,//not used
+        color-warning-900: #774200,//not used
 
-          color-info-400: #31A0C5,
-          //not used
-
-          color-info-500: #006DA0,
-          //not used
-
-          color-info-600: #005489,
-          //not used
-
-          color-info-700: #003F73,
-          //not used
-
-          color-info-800: #002D5C,
-          //not used
-
-          color-info-900: #00204C,
-          //not used
-
-          color-warning-100: #FEF5CB,
-          //not used
-
-          color-warning-200: #FEE898,
-          //not used
-
-          color-warning-300: #FDD665,
-          //not used
-
-          color-warning-400: #FBC53E,
-          //not used
-
-          color-warning-500: #F9AA00,
-          //not used
-
-          color-warning-600: #D68B00,
-          //not used
-
-          color-warning-700: #B36E00,
-          //not used
-
-          color-warning-800: #905400,
-          //not used
-
-          color-warning-900: #774200,
-          //not used
-
-          color-danger-100: #FDE3D6,
-          //not used
-
-          color-danger-200: #FBC2AE,
-          //not used
-
-  color-danger-300: #F49784,
-  //ground in error message
-
-          color-danger-400: #E96F63,
-          //not used
-
-  color-danger-500: #DB3434,
-  //text in error message
-
-  color-danger-600: #BC2633,
-  //text in error message, cancelled, happy hour
-
-          color-danger-700: #9D1A30,
-          //not used
-
-          color-danger-800: #7F102D,
-          //not used
-
-          color-danger-900: #69092A,
-          //not used
+        color-danger-100: #FDE3D6,//not used
+        color-danger-200: #FBC2AE,//not used
+        color-danger-300: #F49784,//ground in error message
+        color-danger-400: #E96F63,//not used
+        color-danger-500: #DB3434,//text in error message
+        color-danger-600: #BC2633,//text in error message, cancelled, happy hour
+        color-danger-700: #9D1A30,//not used
+        color-danger-800: #7F102D,//not used
+        color-danger-900: #69092A,//not used
 
 
   font-family-primary: "Open Sans, sans-serif",
@@ -168,27 +172,6 @@ $nb-themes: nb-register-theme((
   text-paragraph-font-size:1rem,
 
   button-text-font-weight: 700,
-
-  // for buttons in welcome and bye
-  button-filled-info-background-color: color-primary-100,
-
-  button-filled-info-border-color: color-primary-100,
-
-  //for buttons in welcome and bye component, and also focus and active for select hour in calendar
-  button-filled-info-text-color: color-primary-500,
-
-  button-filled-primary-hover-background-color : color-primary-500,
-  button-filled-primary-hover-border-color: color-primary-500,
-
-  
-  layout-background-color:background-basic-color-2,
-
-  //card-background-color: color-primary-200,
-  //card-text-color:
-  //card-border-color:
-
-
-  background-primary-color-1: color-primary-500,
 
   card-border-radius:0.40rem,
   card-shadow:none,
