@@ -25,6 +25,9 @@ export class VerifyComponent implements OnInit {
   errorAdviseMessage:Subscription;
   errorMessage:string = null;
 
+  isLoadingStatus:Subscription;
+  isLoading:Boolean = false;
+
   constructor( 
     private dataStorageService:DataStorageService,
     private meta:Meta
@@ -61,11 +64,14 @@ export class VerifyComponent implements OnInit {
       customer_id:this.vars_for_view.customer.id
     }
     this.dataStorageService.collectBookingInfo(bookDataToPass);
+    this.isLoadingStatus = this.dataStorageService.change_is_Loading_data.subscribe(
+      status => this.isLoading = status);
   }
 
   ngOnDestroy():void {
     this.stateChangeSub.unsubscribe();
     this.errorAdviseMessage.unsubscribe();
+    this.isLoadingStatus.unsubscribe();
   }
 
 }

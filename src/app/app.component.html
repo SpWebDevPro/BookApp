@@ -1,5 +1,7 @@
 <nb-layout class="main-layout" >
-
+  <div *ngIf="isLoading" class="spiner" fxLayout="column" fxLayoutAlign="center">
+    <app-loding-spinner></app-loding-spinner>
+  </div>
   <nb-layout-header class="header" fixed *ngIf="!headerAndFooterDisabled && !headerDisabled" >
     <div>
       <div (click)="onLogoClick()" >

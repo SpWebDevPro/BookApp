@@ -32,6 +32,8 @@ export class ConfirmationComponent implements OnInit {
   errorAdviseMessage:Subscription;
   errorMessage:string = null;
 
+  //isLoading:Boolean;
+
 
   constructor(
     private dataStorageService:DataStorageService,
@@ -52,6 +54,8 @@ export class ConfirmationComponent implements OnInit {
         this.step = this.state.active_step_model;
         this.booking_id = this.state.booking.id;
     });
+
+    //this.isLoading = true;
 
     this.brand_company = this.dataStorageService.myBrand.company;
     this.brand_Name_Application = this.dataStorageService.myBrand.name;
@@ -76,6 +80,7 @@ export class ConfirmationComponent implements OnInit {
 
 
     if (this.booking_id){
+      //this.isLoading = false;
       this.message_confirmation = this.step.description;
       this.dataStorageService.changeBtnMenu("Continuer");
     }

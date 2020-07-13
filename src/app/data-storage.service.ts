@@ -265,7 +265,7 @@ export class DataStorageService {
             .get(url, httpOptions)
             .pipe(
                 tap((response) => {
-                    // console.log(`response for ${url}:`, response)
+                    //console.log(`response for ${url}:`, response)
                 })
             )
             .subscribe( data => {
@@ -276,6 +276,7 @@ export class DataStorageService {
     }
 
     getStepDetailsfromWP(step_name, booking, restrictions, direction,customer){
+        this.dispatchIsLoadingStatus(true);
         let url = this.getEndPointUrl(step_name);
         let httpOptions = {
             headers : new HttpHeaders({
@@ -297,7 +298,7 @@ export class DataStorageService {
                 httpOptions)
             .pipe(
                 tap((response) => {
-                    console.log(`response for ${url}:`, response)
+                    //console.log(`response for ${url}:`, response)
                 })
             )
             .subscribe( receivedData => {
@@ -317,6 +318,7 @@ export class DataStorageService {
                     this.displayStep(this.checkStepToDisplay().name);
                     this.disableNextBtn(!this.show_next_btn);
                     this.disablePrevBtn(!this.show_prev_btn);
+                    this.dispatchIsLoadingStatus(false);
                     if(this.is_pre_last_step){
                         this.changeBtnMenu('Terminer');
                     }
@@ -332,7 +334,7 @@ export class DataStorageService {
             .get(url)
             .pipe(
                 tap((response) => {
-                    console.log(`response for ${url}:`, response)
+                    //console.log(`response for ${url}:`, response)
                 })
             )
             .subscribe( 
@@ -369,7 +371,7 @@ export class DataStorageService {
             .get(url)
             .pipe(
                 tap((response) => {
-                    console.log(`response for ${url}:`, response);
+                    //console.log(`response for ${url}:`, response);
                 })
             )
             .subscribe( receivedData => {
@@ -452,7 +454,7 @@ export class DataStorageService {
 
     //pass errorInfo to suscribers Component
     dispatchErrorInfos(value:any){
-        console.log('je dispatch les infos erreurs');
+        //console.log('je dispatch les infos erreurs');
         //this.dispatchIsLoadingStatus(false);
         return this.advise_errorMessage_ds.next(value);
     }
@@ -469,9 +471,9 @@ export class DataStorageService {
     //that will gather all messages error, exepted for authentication
     // authentication must keep separated
     handleErrors(error){
-        console.log('error in handle error:', error);
-        console.log('error.status:', error.status);
-        console.log('error.error.code:', error.error.code);
+        //console.log('error in handle error:', error);
+        //console.log('error.status:', error.status);
+        //console.log('error.error.code:', error.error.code);
                 if(error.error.code){
                     switch(error.error.code) {
                         case "jwt_auth_invalid_token":

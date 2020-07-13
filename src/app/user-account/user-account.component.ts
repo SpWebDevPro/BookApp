@@ -32,7 +32,7 @@ export class UserAccountComponent implements OnInit, OnDestroy {
     this.dataStorageService.displayHeaderAndFooter(false);
     this.dataStorageService.displayNavButtonDiv(true);
     this.today= this.getToday();
-    console.log(this.today);
+    //console.log(this.today);
     this.errorAdviseMessage = this.dataStorageService.advise_errorMessage_ds.subscribe(
       (error) => {
         this.dataStorageService.openDialog(error, null);
@@ -45,10 +45,10 @@ export class UserAccountComponent implements OnInit, OnDestroy {
       (receiveddata:any) => {
         this.isLoading = false;
         this.bookings = receiveddata;
-        console.log('this.bookings :', this.bookings);
+        //console.log('this.bookings :', this.bookings);
         let shortedBookings = this.shortBookings(this.bookings);
         this.sortedBookings = this.sortBookings(shortedBookings);
-        console.log('this.sortedBookings:', this.sortedBookings);
+        //console.log('this.sortedBookings:', this.sortedBookings);
 
       }
     )

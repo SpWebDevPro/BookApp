@@ -1,6 +1,7 @@
 @import '~@nebular/theme/styles/theming';
 @import '~@nebular/theme/styles/themes/default';
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap');
 
 $nb-enable-css-custom-properties: true;
 
@@ -37,7 +38,7 @@ $nb-themes: nb-register-theme((
         color-basic-1000:#151a30,
         color-basic-1100: #131729,
 
-        background-basic-color-1: color-basic-100,
+        background-basic-color-1: color-basic-100, //used also for header and footer
         background-basic-color-2: color-basic-200,
         background-basic-color-3: color-basic-300,
         background-basic-color-4: color-basic-400,
@@ -66,13 +67,15 @@ $nb-themes: nb-register-theme((
         color-primary-100: #F3FBE8, //used in datepicker selection
         color-primary-200: #EDEDED, //not used
         color-primary-300: #B0DE88, //not used
-        color-primary-400: #86BE61, //not used
+        color-primary-400: #86BE61, //used in buttons status-primary:hover
         color-primary-500: #549434, //used in main button
         color-primary-600: #3E7F26, //not used
         color-primary-700: #2A6A1A, //not used
         color-primary-800: #1A5510, //not used
-        color-primary-900: #0E4709, //not used
+        color-primary-900: #0E4709, //used in buttons status-primary:focus
 
+        button-filled-primary-focus-background-color : color-primary-900,
+        card-header-primary-background-color : color-primary-500,
 
 
 // 2- couleur Welcome & bye : will be soft or contrasted matching Appel
@@ -160,14 +163,17 @@ $nb-themes: nb-register-theme((
 
 
   font-family-primary: "Open Sans, sans-serif",
-  font-family-secondary: "Roboto, sans-serif",
+//   font-family-secondary: "Roboto, sans-serif",
+  font-family-secondary: "Abril fatface, cursive",
 
   text-heading-1-font-family:font-family-secondary,
+  //text-heading-1-font-family:font-family-primary,
   text-heading-1-font-weight:400,
+
 
   text-heading-6-color:#333,
   //prix des services
-
+  text-heading-6-font-family:font-family-primary,
   text-heading-6-font-weight:600,
   text-paragraph-font-size:1rem,
 

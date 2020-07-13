@@ -30,8 +30,15 @@
 
   [nbButton].appearance-filled.status-primary.btn-terminer:hover {
     background-color: var(--button-filled-primary-background-color);
-    border-color: var(--button-filled-primary-border-color);
-    color: var(--button-filled-primary-text-color);g
+    border-color: var(--button-filled-primary-background-color);
+    color: var(--button-filled-primary-text-color);
+  }
+
+  [nbButton].appearance-filled.status-primary.btn-terminer:focus {
+    background-color: var(--button-filled-primary-focus-background-color);
+  border-color: var(--button-filled-primary-focus-background-color);
+  color: var(--button-filled-primary-text-color);
+  outline: none;
   }
 
 .advise-app-install{

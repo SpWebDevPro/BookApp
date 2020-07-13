@@ -1,5 +1,7 @@
-
-<div class="verify" fxLayout="column" fxLayoutAlign="center">
+<div class="spiner" fxLayout="column" fxLayoutAlign="center" *ngIf="isLoading">
+        <app-loding-spinner></app-loding-spinner>
+</div>
+<div *ngIf="!isLoading" class="verify" fxLayout="column" fxLayoutAlign="center">
         <nb-card fxFlexAlign="center" class="verify-card">
         <nb-card-body >
                 <h6>Merci de vérifier les informations du rendez-vous</h6>

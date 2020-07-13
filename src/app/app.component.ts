@@ -73,7 +73,7 @@ export class AppComponent implements OnInit, OnDestroy {
   message3:string;
   message4:string;
 
-  
+  isLoading:Boolean;
   
   constructor(
     private dataStorageService:DataStorageService,
@@ -131,6 +131,7 @@ export class AppComponent implements OnInit, OnDestroy {
   //*******************************************
 
     this.dbService.clearStore();
+    this.isLoading = false;
 
 
   //***** handle app banner
@@ -242,6 +243,7 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe((value:string) => {
         this.btnMenu = value;
         if (this.btnMenu == 'Terminer'){
+          // this.isLoading = true;
           document.getElementById('next').className +=" btn-terminer";
         }
         console.log('this.btnMenu', this.btnMenu);
@@ -286,6 +288,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   goStep(direction){
+    // this.isLoading = true;
     this.btnDirection = direction.hostElement.nativeElement.id;
     this.dataStorageService.goToNextStep(this.btnDirection);
   }

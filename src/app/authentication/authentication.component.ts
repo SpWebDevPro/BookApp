@@ -85,7 +85,7 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
 
     this.errorAdviseMessage = this.authenticationService.advise_errorMessage.subscribe(
       (error) => {
-        console.log('im in auth component and receive error message');
+        //console.log('im in auth component and receive error message');
         this.errorMessage = error;
         this.openDialog(error, null);
         
