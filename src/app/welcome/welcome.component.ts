@@ -57,27 +57,23 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     this.IsLoggedInSub = this.authenticationService.login_status
     .subscribe((value:Boolean) => {
       this.isLoggedIn = value;
-      // console.log('From welcome cpt, this.isLoggedIn :', this.isLoggedIn);
-      // if(!this.isLoggedIn){
-      //   this.authenticationService.logOutUser();
-      // }
+      //console.log('From welcome cpt, this.isLoggedIn :', this.isLoggedIn);
     });
     this.authenticationService.isLoggedIn();
     if(!this.isLoggedIn){
       this.authenticationService.logOutUser();
-      // this.startProcess();
     }
 
     this.errorAdviseMessage = this.dataStorageService.advise_errorMessage_ds.subscribe(
       (error) => {
         this.dataStorageService.openDialog(error, null);
-        // this.errorMessage = error;
+        if (error === "Votre connexion précédente est trop ancienne. Vous devez vous reconnecter") {
+          this.authenticationService.logOutUser();
+        }
       });
     this.successAdviseMessage = this.dataStorageService.advise_successMessage_ds.subscribe(
       (success) => {
-        // console.log('success:', success['message']);
         this.dataStorageService.openDialog(null, success['message']);
-        // this.successMessage = success.message;
       });
 
     this.brand_Name_Application = this.dataStorageService.myBrand.name;

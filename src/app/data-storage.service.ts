@@ -12,6 +12,7 @@ import { HandlingErrorsComponent } from './handling-errors/handling-errors.compo
 import { NbDialogService } from '@nebular/theme';
 import { environment } from 'src/environments/environment';
 import { dbService } from './indexeddb.service';
+import { AuthenticationService } from './authentication/authentication.service';
 
 
 
@@ -19,6 +20,10 @@ import { dbService } from './indexeddb.service';
 export class DataStorageService {
 
     myBrand = new Brand(environment.name,environment.welcome,'','',environment.baseUrlApi, environment.company, environment.appUrl)
+
+
+
+
 
     state:any;
     change_state = new Subject<Boolean>();
@@ -478,6 +483,8 @@ export class DataStorageService {
                     switch(error.error.code) {
                         case "jwt_auth_invalid_token":
                             this.errorMessage = "Votre connexion précédente est trop ancienne. Vous devez vous reconnecter";
+                            console.log('j envoie le message depuis data storage')//this.authService.logOutUser(); pas autorisé, pb de circular dependency
+                            //this.router.navigate(['/user']);
                             break;
                         default:
                             this.errorMessage = "Une erreur s'est produite"; 

@@ -1,10 +1,10 @@
 {
-  "name": "BookApp demo application",
-  "short_name": "BookApp",
+  "name": "ReseaDemo",
+  "short_name": "ReseaDemo",
   "theme_color": "#549434",
   "background_color": "#549434",
   "display": "standalone",
-  "description": "BookApp demo application de réservation en ligne",
+  "description": "Resea Demo - application de réservation en ligne pour les professionnels qui souhaitent proposer la prise de rendez-vous en ligne à leurs clients",
   "lang": "fr",
   "scope": "/",
   "start_url": "/",

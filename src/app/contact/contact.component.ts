@@ -85,6 +85,8 @@ export class ContactComponent implements OnInit {
       else {
         prefilled_email = '';
       }
+    let prefilled_comments:string;
+    prefilled_comments = '';
       
     this.contactForm = new FormGroup({
       'nom': new FormControl(
@@ -104,7 +106,10 @@ export class ContactComponent implements OnInit {
           disabled:true
         },
         [Validators.required, Validators.email]),
-      'commentaire': new FormControl(null, Validators.maxLength(100))
+      'commentaire': new FormControl(
+        prefilled_comments,
+        Validators.maxLength(100)
+        )
     });
   }
 

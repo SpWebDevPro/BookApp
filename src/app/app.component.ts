@@ -246,16 +246,22 @@ export class AppComponent implements OnInit, OnDestroy {
           // this.isLoading = true;
           document.getElementById('next').className +=" btn-terminer";
         }
-        console.log('this.btnMenu', this.btnMenu);
+        //console.log('this.btnMenu', this.btnMenu);
       });
 
     //check Authentication
     this.IsLoggedInSub = this.authenticationService.login_status
     .subscribe((value:Boolean) => {
       this.isLoggedIn = value;
-      // console.log('From app cpt, this.isLoggedIn :', this.isLoggedIn);
+      //console.log('From app cpt, this.isLoggedIn :', this.isLoggedIn);
     });
-    // this.authenticationService.isLoggedIn();
+    this.authenticationService.isLoggedIn();
+    if(!this.isLoggedIn){
+      this.authenticationService.logOutUser();
+      //console.log('je suis ds app et je viens de faire logOut');
+      //this.router.navigate(['/user']);
+      // this.startProcess();
+    }
 
     
     //go to splash screen welcome
