@@ -1,9 +1,45 @@
 
-=======
-# BookApp
-BookApp is a web application to book anykind of appointments. 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.3.
+# BookApp RESEA
+Application de réservation en ligne, téléchargeable en version mobile (progressive web app)  
+
+Front développé en Typescript avec Angular :   
+permet de créer un compte utilisateur, choisir les services proposés,  le prestataire, un créneau horaire parmi les plages proposées, renseigner ses infos et obtenir une confirmation de RDV. Le front est personnalisé avec logo et couleurs de l'entreprise. Les clients finaux ont la possibilité d'installer l'application sur leur mobile, grâce au format PWA.  
+
+Back en PHP via plugin sous Wordpress et création de endpoints REST API. Création des prestations, personnalisation des messages, des services, des disponibilités. Confirmations envoyées par mail, par sms, et synchronisation avec Google Calendar et google contacts.  
+
+______________________________________________________
+
+Keywords : 
+Typescript, HTML, CSS, Angular, PWA, PHP, GoogleAppScript  
+
+This project was generated with :  
+- [Angular CLI](https://github.com/angular/angular-cli) version 8.3.3.  
+- Typescript 
+- HTML5, CSS3 
+- Nebular 
+- PHP 
+
+______________________________________________________
+
+![screenshot1](https://github.com/SpWebDevPro/BookApp/blob/master/img/5.png)  
+
+![screenshot2](https://github.com/SpWebDevPro/BookApp/blob/master/img/6.png)  
+
+![screenshot3](https://github.com/SpWebDevPro/BookApp/blob/master/img/7.png)  
+
+![screenshot4](https://github.com/SpWebDevPro/BookApp/blob/master/img/8.png)  
+
+![screenshot5](https://github.com/SpWebDevPro/BookApp/blob/master/img/3.png)  
+
+![screenshot6](https://github.com/SpWebDevPro/BookApp/blob/master/img/4.png)  
+
+![screenshot7](https://github.com/SpWebDevPro/BookApp/blob/master/img/1.png)  
+
+![screenshot8](https://github.com/SpWebDevPro/BookApp/blob/master/img/2.png)  
+
+   
+_______________________________________________________
 
 ## Development server
 
